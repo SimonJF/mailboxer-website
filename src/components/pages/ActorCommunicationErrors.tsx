@@ -1,7 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ClientCode from "../code/ClientCode";
-import IDServerCode from "../code/IDServerCode";
 
 function ActorCommunicationErrors() {
   return (
@@ -19,12 +17,42 @@ function ActorCommunicationErrors() {
       <Row className="mb-5">
         <Col md={6}>
           <h5 className="mb-2">Server</h5>
-          <IDServerCode />
+          <div className="code-pane position-relative">
+            <pre className="code-block">
+{`id_server() ->
+  receive
+    {init, N} -> id_server_loop(N)
+  end.
+
+id_server_loop(N) ->
+  receive
+    {get, Client} ->
+      Client ! {id, N},
+      id_server_loop(N + 1);
+    {init, _} -> error
+  end.`}
+            </pre>
+          </div>
         </Col>
 
         <Col md={6}>
           <h5 className="mb-2">Client</h5>
-          <ClientCode />
+          <div className="code-pane position-relative">
+            <pre className="code-block">
+{`client() ->
+
+  % Create server.
+  Server = spawn {id_server, []},
+
+  % Initialize server.
+  Server ! {init, 5},
+
+  Server ! {get, self},
+  receive
+    {id, Id} -> print Id
+  end.`}
+            </pre>
+          </div>
         </Col>
       </Row>
       <br />
