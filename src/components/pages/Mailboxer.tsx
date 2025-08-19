@@ -46,7 +46,7 @@ function Mailboxer() {
             <Col md={6}>
               <h3 className="h5 fw-semibold mb-3">Server</h3>
               <div className="code-pane position-relative">
-                <pre className="code-block">
+                <pre className="code-block" style={{ height: '400px', overflow: 'auto' }}>
                   {`-new id_server.
 -spec id_server() → unit.
 id_server() →
@@ -71,7 +71,7 @@ id_server_loop(N) →
             <Col md={6}>
               <h3 className="h5 fw-semibold mb-3">Client</h3>
               <div className="code-pane position-relative">
-                <pre className="code-block">
+                <pre className="code-block" style={{ height: '400px' }}>
                   {`-new id_client.
 -spec client() → unit.
 client() →
