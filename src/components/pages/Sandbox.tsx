@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import { Button, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 
 function Sandbox() {
+  useEffect(() => {
+    document.title = 'Sandbox - Mailboxer';
+  }, []);
   return (
     <Container className="py-5" style={{ maxWidth: "1400px" }}>
       {/* Header */}

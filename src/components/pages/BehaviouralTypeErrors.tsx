@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
 
 function BehaviouralTypeErrors() {
+  useEffect(() => {
+    document.title = 'Behavioural Type Errors - Mailboxer';
+  }, []);
   return (
     <Container className="py-5">
       {/* Header */}

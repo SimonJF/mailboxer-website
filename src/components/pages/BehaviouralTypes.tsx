@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 function BehaviouralTypes() {
+  useEffect(() => {
+    document.title = 'Behavioural Types - Mailboxer';
+  }, []);
   return (
     <Container fluid className="py-5" style={{ maxWidth: '1400px' }}>
       {/* Header Section */}

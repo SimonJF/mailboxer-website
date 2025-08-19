@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  useEffect(() => {
+    document.title = 'Home - Mailboxer';
+  }, []);
   return (
     <Container fluid className="py-5" style={{ maxWidth: '1400px' }}>
       {/* Header Section */}

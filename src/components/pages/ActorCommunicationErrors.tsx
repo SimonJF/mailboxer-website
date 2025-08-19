@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function ActorCommunicationErrors() {
+  useEffect(() => {
+    document.title = 'Actor Communication Errors - Mailboxer';
+  }, []);
   return (
     <Container className="py-5">
       {/* Header */}

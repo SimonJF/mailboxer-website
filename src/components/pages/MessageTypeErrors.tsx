@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function MessageTypeErrors() {
+  useEffect(() => {
+    document.title = 'Message Type Errors - Mailboxer';
+  }, []);
   return (
     <Container className="py-5">
       {/* Header */}

@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import { Col, Container, Row } from "react-bootstrap";
 
 function Mailboxer() {
+  useEffect(() => {
+    document.title = 'What is Mailboxer? - Mailboxer';
+  }, []);
   return (
     <Container className="py-5" style={{ maxWidth: "1200px" }}>
       {/* Header */}
