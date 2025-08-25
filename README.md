@@ -40,7 +40,7 @@ chmod +x ./start-docker.sh
 ./start-docker.sh
 ```
 
-> **Important:** Local development only provides the website interface. Full Mailboxer sandbox functionality requires the paterl Docker container, which is automatically set up by the start-docker.sh script.
+> **Important:** Local development only provides the website interface. Full Mailboxer sandbox functionality requires the paterl Docker container, which is automatically set up by the start-docker.sh script. The script runs docker-compose to create a complete stack including both the website and the paterl analysis engine.
 
 ## Features
 
