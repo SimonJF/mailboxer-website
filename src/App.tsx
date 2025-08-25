@@ -1,34 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Footer from './components/layout/Footer'
+import Navbar from './components/layout/Navbar'
+import About from './components/pages/About'
+import ActorCommunicationErrors from './components/pages/ActorCommunicationErrors'
+import BehaviouralTypes from './components/pages/BehaviouralTypes'
+import Home from './components/pages/Home'
+import Mailboxer from './components/pages/Mailboxer'
+import MailboxerExamples from './components/pages/MailboxerExamples'
+import OmittedReply from './components/pages/OmittedReply'
+import PayloadMismatch from './components/pages/PayloadMismatch'
+import Sandbox from './components/pages/Sandbox'
+import UnexpectedRequest from './components/pages/UnexpectedRequest'
+import UnsupportedRequest from './components/pages/UnsupportedRequest'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      <main className="flex-grow-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/actor-communication-errors" element={<ActorCommunicationErrors />} />
+          <Route path="/actor-communication-errors/message-type-error/payload-mismatch" element={<PayloadMismatch />} />
+          <Route path="/actor-communication-errors/message-type-error/unsupported-request" element={<UnsupportedRequest />} />
+          <Route path="/actor-communication-errors/behavioural-type-error/unexpected-request" element={<UnexpectedRequest />} />
+          <Route path="/actor-communication-errors/behavioural-type-error/omitted-reply" element={<OmittedReply />} />
+          <Route path="/behavioural-types" element={<BehaviouralTypes />} />
+          <Route path="/mailboxer" element={<Mailboxer />} />
+          <Route path="/mailboxer-examples" element={<MailboxerExamples />} />
+          <Route path="/sandbox" element={<Sandbox />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   )
 }
 

@@ -1,0 +1,22 @@
+services:
+  mailboxer-website:
+    image: zubywastaken/mailboxer-website:latest
+    container_name: mailboxer-website
+    ports:
+      - "3000:3001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./examples:/app/examples
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - paterl
+
+  paterl:
+    image: zubywastaken/paterl:slim
+    container_name: paterl
+    volumes:
+      - ./examples:/workspace
+    working_dir: /workspace
+    tty: true
+    stdin_open: true

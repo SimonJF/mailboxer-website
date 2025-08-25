@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.pdf
+
+# Exclude include folder in examples
+examples/ebin/
