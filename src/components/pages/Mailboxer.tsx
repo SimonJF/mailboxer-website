@@ -1,119 +1,211 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
+// Page explaining what Mailboxer is and how it works with code examples
 function Mailboxer() {
   useEffect(() => {
-    document.title = 'What is Mailboxer? - Mailboxer';
+    document.title = "What is Mailboxer? - Mailboxer";
   }, []);
   return (
-    <Container className="py-5" style={{ maxWidth: "1200px" }}>
-      {/* Header */}
+    <Container className="py-5 mailboxer-container">
+      {/* Page title */}
       <Row className="mb-5">
         <Col>
           <h1 className="display-4 text-center mb-4">What is Mailboxer?</h1>
         </Col>
       </Row>
 
-      {/* Intro Section */}
+      {/* Main description of Mailboxer tool */}
       <Row className="mb-5">
         <Col>
           <p className="lead text-center">
-            <strong>Mailboxer</strong> is a runtime verification tool for actor-based programs that integrates mailbox types with Erlang. It provides compile-time and runtime checking of communication protocols, preventing deadlocks, protocol violations, and message type mismatches.
+            <strong>Mailboxer</strong> is a runtime verification tool for
+            actor-based programs that integrates mailbox types with Erlang. It
+            provides compile-time and runtime checking of communication
+            protocols, preventing deadlocks, protocol violations, and message
+            type mismatches.
           </p>
         </Col>
       </Row>
 
-      {/* Code Section */}
+      {/* Code example showing annotated Erlang with mailbox types */}
       <Row className="mb-5">
         <Col>
           <h2 className="text-center h4 fw-semibold mb-4">
             Annotated ID Server and Client using Mailbox Types
           </h2>
 
-          <Row>
-            <Col md={6}>
-              <h3 className="h5 fw-semibold mb-3">Server</h3>
-              <div className="code-pane position-relative">
-                <pre className="code-block" style={{ height: '400px', overflow: 'auto' }}>
-                  <span style={{ color: '#0066cc', fontWeight: 'bold' }}>-new id_server.</span>{`
-`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-spec id_server() → unit.</span>{`
-id_server() →
-  `}<span style={{ color: '#cc6600', fontWeight: 'bold' }}>assert("init.get*")</span>{`,
+          <div className="code-pane position-relative">
+            <pre className="code-block mailboxer-code-block">
+              <span className="syntax-comment">% MAILBOX TYPES</span>
+              {`
+`}
+              <span className="syntax-type">
+                -type init() :: {"{"}init, integer(){"}"}.
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -type get() :: {"{"}get, id_client_mb(){"}"}.
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -type id() :: {"{"}id, integer(){"}"}.
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -type id_server_mb() :: pid() | init() | get().
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -type id_client_mb() :: pid() | id().
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -new({"{"}id_server_mb, [id_server/0]{"}"}).
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -use({"{"}id_server_mb, [id_server_loop/1]{"}"}).
+              </span>
+              {`
+`}
+              <span className="syntax-type">
+                -new({"{"}id_client_mb, [id_client/1]{"}"}).
+              </span>
+              {`
+
+`}
+              <span className="syntax-comment">% SERVER</span>
+              {`
+`}
+              <span className="syntax-type">
+                -spec id_server() -&gt; no_return().
+              </span>
+              {`
+id_server() ->
+  `}
+              <span className="syntax-directive">
+                ?expects(id_server_mb, "Init.*Get")
+              </span>
+              {`,
   receive
-    {init, N} → id_server_loop(N)
+    {init, N} -> id_server_loop(N)
   end.
 
-`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-use id_server.</span>{`
-`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-spec id_server_loop(int) → unit.</span>{`
-id_server_loop(N) →
-  `}<span style={{ color: '#cc6600', fontWeight: 'bold' }}>assert("get*")</span>{`,
+`}
+              <span className="syntax-type">
+                -spec id_server_loop(integer()) -&gt; no_return().
+              </span>
+              {`
+id_server_loop(N) ->
+  `}
+              <span className="syntax-directive">?expects("*Get")</span>
+              {`,
   receive
-    {get, Client} →
+    {get, Client} ->
       Client ! {id, N},
       id_server_loop(N + 1)
-  end.`}
-                </pre>
-              </div>
-            </Col>
+  end.
 
-            <Col md={6}>
-              <h3 className="h5 fw-semibold mb-3">Client</h3>
-              <div className="code-pane position-relative">
-                <pre className="code-block" style={{ height: '400px' }}>
-                  <span style={{ color: '#0066cc', fontWeight: 'bold' }}>-new id_client.</span>{`
-`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-spec client() → unit.</span>{`
-client() →
-  Server = spawn {id_server, []},
-  
-  Server ! {init, 5},
-  Server ! {get, self},
-  `}<span style={{ color: '#cc6600', fontWeight: 'bold' }}>assert("id")</span>{`,
+`}
+              <span className="syntax-comment">% CLIENT</span>
+              {`
+`}
+              <span className="syntax-type">
+                -spec id_client(id_server_mb()) -&gt; integer().
+              </span>
+              {`
+id_client(Server) ->
+  Self = self(),
+  Server ! {get, Self},
+  `}
+              <span className="syntax-directive">
+                ?expects(id_client_mb, "Id")
+              </span>
+              {`,
   receive
-    {id, Id} → print Id
-  end.`}
-                </pre>
-              </div>
-            </Col>
-          </Row>
+    {id, Id} -> Id
+  end.
+
+`}
+              <span className="syntax-comment">% MAIN</span>
+              {`
+`}
+              <span className="syntax-type">-spec main() -&gt; any().</span>
+              {`
+main() ->
+  Server = spawn(?MODULE, id_server, []),
+  Server ! {init, 5},
+  Id = id_client(Server),
+  format("Id: ~p~n", [Id]).`}
+            </pre>
+          </div>
         </Col>
       </Row>
 
-      {/* Mailbox Types Section */}
+      {/* Explanation of mailbox type syntax and capabilities */}
       <Row className="mb-5">
         <Col>
           <h2 className="h4 fw-semibold mb-3">Mailbox Types</h2>
           <p>
-            Mailbox types are behavioral specifications that describe expected message sequences between processes. They use regular expression syntax: <code>!msg(type)</code> (send), <code>?msg(type)</code> (receive), <code>*</code> (zero or more), <code>.</code> (sequence).
+            Behavioral type specifications for message-passing protocols using
+            regular expression syntax: <code>!msg(type)</code> (send),{" "}
+            <code>?msg(type)</code> (receive), <code>*</code> (repetition),{" "}
+            <code>.</code> (sequencing).
           </p>
           <p>
-            <strong>Key Benefits:</strong> Protocol verification, deadlock prevention, message type safety, runtime monitoring, and executable documentation.
+            <strong>Properties:</strong> Static protocol verification, deadlock
+            detection, type safety, runtime compliance checking.
           </p>
         </Col>
       </Row>
 
-      {/* Pat Language Section */}
+      {/* Details about the Pat language extension for Erlang */}
       <Row className="mb-5">
         <Col>
-          <h2 className="h4 fw-semibold mb-3">Pat Language</h2>
+          <h2 className="h4 fw-semibold mb-3">Pat Language Extension</h2>
           <p>
-            Pat extends Erlang with mailbox type annotations: <code>-new</code> (declares new type), <code>-use</code> (references existing type), <code>-spec</code> (function signatures), <code>assert("pattern")</code> (expected message patterns).
+            Minimal Erlang extension with annotations: <code>-new</code> (type
+            declaration), <code>-use</code> (type reference),{" "}
+            <code>?expects(pattern)</code> (protocol assertion).
           </p>
           <p>
-            <strong>Erlang Integration:</strong> Compatible with existing code, compiles to standard bytecode, integrates with OTP.
+            <strong>Implementation:</strong> Source-to-source transformation,
+            standard BEAM bytecode generation, OTP compatibility.
           </p>
         </Col>
       </Row>
 
-      {/* Key Features Section */}
+      {/* Overview of static and runtime verification methods */}
       <Row className="mb-5">
         <Col>
-          <h2 className="h4 fw-semibold mb-3">Key Features</h2>
+          <h2 className="h4 fw-semibold mb-3">Verification Approach</h2>
           <p>
-            <strong>Static Analysis:</strong> Compile-time protocol checking, type inference, deadlock detection, protocol compatibility verification.
+            <strong>Static Analysis:</strong> Compile-time protocol checking,
+            type inference, deadlock detection.
           </p>
           <p>
-            <strong>Runtime Verification:</strong> Dynamic monitoring, detailed error reporting, graceful degradation, minimal performance overhead.
+            <strong>Runtime Monitoring:</strong> Dynamic compliance checking,
+            violation reporting, minimal overhead.
           </p>
+        </Col>
+      </Row>
+
+      {/* Next page navigation link */}
+      <Row>
+        <Col>
+          <div className="text-end">
+            <Link to="/mailboxer-examples" className="text-decoration-none">
+              Next: Mailboxer Examples
+            </Link>
+          </div>
         </Col>
       </Row>
     </Container>

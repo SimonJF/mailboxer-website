@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 *.pdf
+
+# Exclude include folder in examples
+examples/ebin/

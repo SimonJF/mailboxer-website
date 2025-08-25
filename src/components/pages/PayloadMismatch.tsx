@@ -1,25 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// Page explaining the payload mismatch communication error with code examples
 function PayloadMismatch() {
   useEffect(() => {
-    document.title = 'Payload Mismatch - Mailboxer';
+    document.title = "Payload Mismatch - Mailboxer";
   }, []);
 
   return (
     <Container className="py-5">
-      {/* Header */}
+      {/* Page title and description of the error type */}
       <Row className="mb-5">
         <Col>
           <h1 className="display-4 text-center mb-4">Payload Mismatch</h1>
           <p className="lead text-center">
-            Understanding message type errors when payload types don't match expectations
+            Understanding message type errors when payload types don't match
+            expectations
           </p>
         </Col>
       </Row>
 
-      {/* Code Example */}
+      {/* Code examples showing server and client with the type error highlighted */}
       <Row className="mb-5">
         <Col>
           <h2 className="mb-4">Payload Mismatch Example</h2>
@@ -62,10 +64,7 @@ id_server_loop(N) ->
     {id, Id} -> print Id
   end.`}
                 </pre>
-                <div
-                  className="position-absolute"
-                  style={{ top: "120px", right: "360px" }}
-                >
+                <div className="payload-mismatch-error-label">
                   <span className="bg-danger text-white px-2 py-1 small">
                     Wrong type
                   </span>
@@ -76,15 +75,16 @@ id_server_loop(N) ->
         </Col>
       </Row>
 
-      {/* Content */}
+      {/* Explanation of the error and its consequences */}
       <Row className="mb-5">
         <Col>
           <h2 className="mb-4">What is a Payload Mismatch?</h2>
           <p>
-            The client sends a message with correct structure but wrong data type. 
-            Here, the server expects an integer but receives a string: <code>{`{init, "5"}`}</code> instead of <code>{`{init, 5}`}</code>.
+            The client sends a message with correct structure but wrong data
+            type. Here, the server expects an integer but receives a string:{" "}
+            <code>{`{init, "5"}`}</code> instead of <code>{`{init, 5}`}</code>.
           </p>
-          
+
           <h3 className="mt-4 mb-3">Impact</h3>
           <ul>
             <li>Runtime errors during arithmetic operations</li>
@@ -94,11 +94,11 @@ id_server_loop(N) ->
         </Col>
       </Row>
 
-      {/* Navigation */}
+      {/* Navigation links to previous and next pages */}
       <Row>
         <Col md={6}>
-          <Link 
-            to="/actor-communication-errors" 
+          <Link
+            to="/actor-communication-errors"
             className="text-decoration-none"
           >
             ← Back to Communication Errors

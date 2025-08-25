@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// Page explaining the unexpected request communication error with code examples
 function UnexpectedRequest() {
   useEffect(() => {
     document.title = "Unexpected Request - Mailboxer";
@@ -9,7 +10,7 @@ function UnexpectedRequest() {
 
   return (
     <Container className="py-5">
-      {/* Header */}
+      {/* Page title and description of the error type */}
       <Row className="mb-5">
         <Col>
           <h1 className="display-4 text-center mb-4">Unexpected Request</h1>
@@ -20,7 +21,7 @@ function UnexpectedRequest() {
         </Col>
       </Row>
 
-      {/* Code Example */}
+      {/* Code examples showing server and client with the protocol violation highlighted */}
       <Row className="mb-5">
         <Col>
           <h2 className="mb-4">Unexpected Request Example</h2>
@@ -65,10 +66,7 @@ id_server_loop(N) ->
     {id, Id} -> print Id
   end.`}
                 </pre>
-                <div
-                  className="position-absolute"
-                  style={{ top: "140px", right: "390px" }}
-                >
+                <div className="unexpected-request-error-label">
                   <span className="bg-danger text-white px-2 py-1 small">
                     Extra init
                   </span>
@@ -79,7 +77,7 @@ id_server_loop(N) ->
         </Col>
       </Row>
 
-      {/* Content */}
+      {/* Explanation of the error and its consequences */}
       <Row className="mb-5">
         <Col>
           <h2 className="mb-4">What is an Unexpected Request?</h2>
@@ -100,7 +98,7 @@ id_server_loop(N) ->
         </Col>
       </Row>
 
-      {/* Navigation */}
+      {/* Navigation links to previous and next pages */}
       <Row>
         <Col md={6}>
           <Link

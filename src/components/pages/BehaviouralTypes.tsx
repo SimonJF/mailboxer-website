@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
+// Page explaining behavioural types and their role in actor communication
 function BehaviouralTypes() {
   useEffect(() => {
     document.title = 'Behavioural Types - Mailboxer';
   }, []);
   return (
-    <Container fluid className="py-5" style={{ maxWidth: '1400px' }}>
-      {/* Header Section */}
+    <Container fluid className="py-5 behavioural-types-container">
+      {/* Page title and introduction */}
       <Row className="mb-5">
         <Col>
           <div className="text-center">
@@ -18,9 +20,9 @@ function BehaviouralTypes() {
         </Col>
       </Row>
 
-      {/* Four Column Section */}
+      {/* Four-column layout explaining key concepts */}
       <Row className="g-4 mb-5">
-        {/* Background */}
+        {/* Background and motivation for behavioural types */}
         <Col lg={3} md={6} sm={12}>
           <div className="h-100">
             <h3 className="h5 fw-semibold mb-3 pb-2 border-bottom">
@@ -35,7 +37,7 @@ function BehaviouralTypes() {
           </div>
         </Col>
 
-        {/* Data Types vs Behavioural Types */}
+        {/* Comparison between traditional and behavioural type systems */}
         <Col lg={3} md={6} sm={12}>
           <div className="h-100">
             <h3 className="h5 fw-semibold mb-3 pb-2 border-bottom">
@@ -53,7 +55,7 @@ function BehaviouralTypes() {
           </div>
         </Col>
 
-        {/* What are Behavioural Types? */}
+        {/* Definition and purpose of behavioural types */}
         <Col lg={3} md={6} sm={12}>
           <div className="h-100">
             <h3 className="h5 fw-semibold mb-3 pb-2 border-bottom">
@@ -68,7 +70,7 @@ function BehaviouralTypes() {
           </div>
         </Col>
 
-        {/* Example */}
+        {/* Concrete example using ID server protocol specification */}
         <Col lg={3} md={6} sm={12}>
           <div className="h-100">
             <h3 className="h5 fw-semibold mb-3 pb-2 border-bottom">
@@ -84,21 +86,32 @@ function BehaviouralTypes() {
         </Col>
       </Row>
 
-      {/* Bottom Section - Relation to Erlang and Summary */}
+      {/* Connection to Erlang and practical benefits summary */}
       <Row>
         <Col>
           <div className="text-center">
             <h2 className="h4 fw-semibold mb-4">
               Relation to Erlang and Summary
             </h2>
-            <div className="mx-auto" style={{ maxWidth: '600px' }}>
-              <p className="mb-3" style={{ lineHeight: '1.6', fontSize: '0.95rem' }}>
+            <div className="mx-auto behavioural-types-summary">
+              <p className="mb-3 behavioural-types-summary-text">
                 Erlang lacks built-in protocol compliance mechanisms, leading to communication bugs like deadlocks and resource leaks.
               </p>
-              <p style={{ lineHeight: '1.6', fontSize: '0.95rem' }}>
+              <p className="behavioural-types-summary-text">
                 Behavioural types provide formal protocol specifications, integrated via type checkers or runtime monitors. This enables early error detection and more reliable concurrent programs.
               </p>
             </div>
+          </div>
+        </Col>
+      </Row>
+
+      {/* Next page navigation link */}
+      <Row>
+        <Col>
+          <div className="text-end">
+            <Link to="/mailboxer" className="text-decoration-none">
+              Next: Intro to Mailboxer
+            </Link>
           </div>
         </Col>
       </Row>

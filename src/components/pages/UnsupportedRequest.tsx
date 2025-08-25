@@ -1,25 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// Page explaining the unsupported request communication error with code examples
 function UnsupportedRequest() {
   useEffect(() => {
-    document.title = 'Unsupported Request - Mailboxer';
+    document.title = "Unsupported Request - Mailboxer";
   }, []);
 
   return (
     <Container className="py-5">
-      {/* Header */}
+      {/* Page title and description of the error type */}
       <Row className="mb-5">
         <Col>
           <h1 className="display-4 text-center mb-4">Unsupported Request</h1>
           <p className="lead text-center">
-            Understanding message type errors when sending unrecognized message types
+            Understanding message type errors when sending unrecognized message
+            types
           </p>
         </Col>
       </Row>
 
-      {/* Code Example */}
+      {/* Code examples showing server and client with the protocol violation highlighted */}
       <Row className="mb-5">
         <Col>
           <h2 className="mb-4">Unsupported Request Example</h2>
@@ -42,10 +44,7 @@ id_server_loop(N) ->
     {init, _} -> error
   end.`}
                 </pre>
-                <div
-                  className="position-absolute"
-                  style={{ top: "105px", right: "370px" }}
-                >
+                <div className="unsupported-request-server-error-label">
                   <span className="bg-danger text-white px-2 py-1 small">
                     Mailbox junk
                   </span>
@@ -70,10 +69,7 @@ id_server_loop(N) ->
     {id, Id} -> print Id
   end.`}
                 </pre>
-                <div
-                  className="position-absolute"
-                  style={{ top: "155px", right: "360px" }}
-                >
+                <div className="unsupported-request-client-error-label">
                   <span className="bg-danger text-white px-2 py-1 small">
                     Wrong tag
                   </span>
@@ -84,15 +80,17 @@ id_server_loop(N) ->
         </Col>
       </Row>
 
-      {/* Content */}
+      {/* Explanation of the error and its consequences */}
       <Row className="mb-5">
         <Col>
           <h2 className="mb-4">What is an Unsupported Request?</h2>
           <p>
-            The client sends a message with an incorrect or unrecognized tag. 
-            Here, <code>{`{gte, self}`}</code> instead of <code>{`{get, self}`}</code> becomes mailbox junk that will never be processed.
+            The client sends a message with an incorrect or unrecognized tag.
+            Here, <code>{`{gte, self}`}</code> instead of{" "}
+            <code>{`{get, self}`}</code> becomes mailbox junk that will never be
+            processed.
           </p>
-          
+
           <h3 className="mt-4 mb-3">Impact</h3>
           <ul>
             <li>Messages accumulate as unprocessed mailbox junk</li>
@@ -103,11 +101,11 @@ id_server_loop(N) ->
         </Col>
       </Row>
 
-      {/* Navigation */}
+      {/* Navigation links to previous and next pages */}
       <Row>
         <Col md={6}>
-          <Link 
-            to="/actor-communication-errors/message-type-error/payload-mismatch" 
+          <Link
+            to="/actor-communication-errors/message-type-error/payload-mismatch"
             className="text-decoration-none"
           >
             ← Previous: Payload Mismatch
