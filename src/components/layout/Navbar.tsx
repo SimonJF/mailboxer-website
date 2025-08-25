@@ -16,22 +16,9 @@ function Navbar() {
             <Nav.Link as={Link} to="/" className="px-3 fw-medium text-uppercase">
               Home
             </Nav.Link>
-            <div className="dropdown px-3">
-              <Link 
-                to="/actor-communication-errors" 
-                className="nav-link fw-medium text-uppercase text-decoration-none dropdown-toggle-custom"
-              >
-                ACTOR COMMUNICATION ERRORS
-              </Link>
-              <div className="dropdown-menu">
-                <Link to="/actor-communication-errors/message-type-errors" className="dropdown-item">
-                  Message Type Errors
-                </Link>
-                <Link to="/actor-communication-errors/behavioural-type-errors" className="dropdown-item">
-                  Behavioural Type Errors
-                </Link>
-              </div>
-            </div>
+            <Nav.Link as={Link} to="/actor-communication-errors" className="px-3 fw-medium text-uppercase">
+              ACTOR COMMUNICATION ERRORS
+            </Nav.Link>
             <Nav.Link as={Link} to="/behavioural-types" className="px-3 fw-medium text-uppercase">
               Behavioural Types
             </Nav.Link>

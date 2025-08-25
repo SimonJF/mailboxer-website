@@ -59,26 +59,58 @@ id_server_loop(N) ->
           </div>
         </Col>
       </Row>
-      <br />
-      <p>
-        Insert explanation here about the code above, and how it works normally
-        and mention how the two types of communication errors are different -
-        dont go into full detail just high level overview. Learn more is to go
-        into the next page.
-      </p>
+
+      {/* Visual Representation */}
+      <Row className="mb-4">
+        <Col className="text-center">
+          <img 
+            src="/src/assets/id_server.webp" 
+            alt="ID Server Visual Representation" 
+            className="img-fluid"
+            style={{ maxHeight: '400px' }}
+          />
+        </Col>
+      </Row>
+
+      <Row className="mb-5">
+        <Col>
+          <h2 className="mb-4">How the ID Server Works</h2>
+          <p className="mb-3">
+            The ID server demonstrates a simple request-response protocol in Erlang. The client spawns a server, 
+            initializes it with a starting number, then requests unique IDs. Each request increments the counter.
+          </p>
+          
+          <h3 className="mb-3">Two Types of Communication Errors</h3>
+          <p className="mb-3">
+            <strong>Message Type Errors:</strong> Wrong message format or payload type (e.g., sending string instead of integer).
+          </p>
+          <p>
+            <strong>Behavioural Type Errors:</strong> Correct message at wrong time in protocol (e.g., multiple init calls or missing responses).
+          </p>
+        </Col>
+      </Row>
 
       {/* Two Column Section */}
       <Row className="mb-5">
         <Col md={6}>
           <div className="pe-3">
             <h3 className="text-center mb-3">Message Type Errors</h3>
-
-            <div className="text-center mt-4">
+            <p className="text-center mb-4">
+              Errors that occur when message structure or payload types don't match expectations
+            </p>
+            
+            <div className="d-flex flex-column gap-2">
               <Link
-                to="/actor-communication-errors/message-type-errors"
+                to="/actor-communication-errors/message-type-error/payload-mismatch"
                 className="btn btn-outline-primary"
               >
-                Learn More
+                Payload Mismatch
+              </Link>
+              <Link
+                to="/actor-communication-errors/message-type-error/unsupported-request"
+                className="btn btn-outline-primary"
+              >
+                Unsupported Request
               </Link>
             </div>
           </div>
@@ -87,12 +119,22 @@ id_server_loop(N) ->
         <Col md={6}>
           <div className="ps-3 border-start">
             <h3 className="text-center mb-3">Behavioural Type Errors</h3>
-            <div className="text-center mt-4">
+            <p className="text-center mb-4">
+              Errors that occur when messages arrive at inappropriate times in the protocol
+            </p>
+            
+            <div className="d-flex flex-column gap-2">
               <Link
-                to="/actor-communication-errors/behavioural-type-errors"
+                to="/actor-communication-errors/behavioural-type-error/unexpected-request"
                 className="btn btn-outline-primary"
               >
-                Learn More
+                Unexpected Request
+              </Link>
+              <Link
+                to="/actor-communication-errors/behavioural-type-error/omitted-reply"
+                className="btn btn-outline-primary"
+              >
+                Omitted Reply
               </Link>
             </div>
           </div>

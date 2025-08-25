@@ -11,7 +11,7 @@ function BehaviouralTypes() {
       <Row className="mb-5">
         <Col>
           <div className="text-center">
-            <h1 className="display-5 mb-4 fw-bold">
+            <h1 className="display-4 text-center mb-4">
               Behavioural Types in Actor Languages
             </h1>
           </div>
@@ -27,29 +27,10 @@ function BehaviouralTypes() {
               Background
             </h3>
             <p className="mb-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Etiam id tristique nulla. Sed sit amet libero diam.
-              Donec dapibus condimentum est. Morbi vestibulum
-              diam sit amet erat vestibulum, sed porttitor velit
-              consequat. Nunc eget est iaculis, hendrerit ex nec,
-              placerat sem. In commodo, eros in condimentum
-              imperdiet, sapien orci rutrum elit, nec auctor velit tortor
-              vel nunc. Aliquam tincidunt vel nulla ut volutpat.
-              Vivamus pellentesque nunc vel neque molestsuodo, et
-              dapibus lorem eleifend. Cras sodales lorem libero, et
-              dignissim sem convallis sed.
-            </p>
-            <p className="mb-3">
-              Suspendisse egestas semper magna pharetra placerat. Sed ullamcorper
-              dolor pharetra velit condimentum, euismod gravida
-              lorem sodales.
+              Actor languages use message passing for process communication. Traditional types describe data structure but not communication patterns.
             </p>
             <p>
-              Praesent nec ipsum ac velit suscipit dignissim.
-              Suspendisse leo metus, venenatis ac maximus sit amet,
-              convallis id diam. Vestibulum blandit ligula ipsum, eget
-              rhoncus ex auctor sit amet. Phasellus et pharetra nisl,
-              eget tristique turpis. Nam ut rutrum felis.
+              Behavioural types formally specify communication protocols, preventing deadlocks and protocol violations.
             </p>
           </div>
         </Col>
@@ -61,29 +42,13 @@ function BehaviouralTypes() {
               Data Types vs Behavioural Types
             </h3>
             <p className="mb-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Etiam id tristique nulla. Sed sit amet libero diam.
-              Donec dapibus condimentum est. Morbi vestibulum
-              diam sit amet erat vestibulum, sed porttitor velit
-              consequat. Nunc eget est iaculis, hendrerit ex nec,
-              placerat sem. In commodo, eros in condimentum
-              imperdiet, sapien orci rutrum elit, nec auctor velit tortor
-              vel nunc. Aliquam tincidunt vel nulla ut volutpat.
-              Vivamus pellentesque nunc vel neque molestsuodo, et
-              dapibus lorem eleifend. Cras sodales lorem libero, et
-              dignissim sem convallis sed.
+              <strong>Data Types:</strong> Structure of values (int, string). Ensure data integrity.
             </p>
             <p className="mb-3">
-              Suspendisse egestas semper magna pharetra placerat. Sed ullamcorper
-              dolor pharetra velit condimentum, euismod gravida
-              lorem sodales.
+              <strong>Behavioural Types:</strong> Message exchange sequences. Define communication protocols.
             </p>
             <p>
-              Praesent nec ipsum ac velit suscipit dignissim.
-              Suspendisse leo metus, venenatis ac maximus sit amet,
-              convallis id diam. Vestibulum blandit ligula ipsum, eget
-              rhoncus ex auctor sit amet. Phasellus et pharetra nisl,
-              eget tristique turpis. Nam ut rutrum felis.
+              Data types prevent payload errors. Behavioural types prevent protocol violations.
             </p>
           </div>
         </Col>
@@ -95,29 +60,10 @@ function BehaviouralTypes() {
               What are Behavioural Types?
             </h3>
             <p className="mb-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Etiam id tristique nulla. Sed sit amet libero diam.
-              Donec dapibus condimentum est. Morbi vestibulum
-              diam sit amet erat vestibulum, sed porttitor velit
-              consequat. Nunc eget est iaculis, hendrerit ex nec,
-              placerat sem. In commodo, eros in condimentum
-              imperdiet, sapien orci rutrum elit, nec auctor velit tortor
-              vel nunc. Aliquam tincidunt vel nulla ut volutpat.
-              Vivamus pellentesque nunc vel neque molestsuodo, et
-              dapibus lorem eleifend. Cras sodales lorem libero, et
-              dignissim sem convallis sed.
-            </p>
-            <p className="mb-3">
-              Suspendisse egestas semper magna pharetra placerat. Sed ullamcorper
-              dolor pharetra velit condimentum, euismod gravida
-              lorem sodales.
+              Formal specifications describing communication patterns between concurrent processes.
             </p>
             <p>
-              Praesent nec ipsum ac velit suscipit dignissim.
-              Suspendisse leo metus, venenatis ac maximus sit amet,
-              convallis id diam. Vestibulum blandit ligula ipsum, eget
-              rhoncus ex auctor sit amet. Phasellus et pharetra nisl,
-              eget tristique turpis. Nam ut rutrum felis.
+              Define valid interaction sequences and expected responses. Enforce protocols at compile-time or runtime to prevent communication errors.
             </p>
           </div>
         </Col>
@@ -129,29 +75,10 @@ function BehaviouralTypes() {
               Example
             </h3>
             <p className="mb-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Etiam id tristique nulla. Sed sit amet libero diam.
-              Donec dapibus condimentum est. Morbi vestibulum
-              diam sit amet erat vestibulum, sed porttitor velit
-              consequat. Nunc eget est iaculis, hendrerit ex nec,
-              placerat sem. In commodo, eros in condimentum
-              imperdiet, sapien orci rutrum elit, nec auctor velit tortor
-              vel nunc. Aliquam tincidunt vel nulla ut volutpat.
-              Vivamus pellentesque nunc vel neque molestsuodo, et
-              dapibus lorem eleifend. Cras sodales lorem libero, et
-              dignissim sem convallis sed.
-            </p>
-            <p className="mb-3">
-              Suspendisse egestas semper magna pharetra placerat. Sed ullamcorper
-              dolor pharetra velit condimentum, euismod gravida
-              lorem sodales.
+              ID server specification: <code>!init(int).(?get().!id(int))*</code>
             </p>
             <p>
-              Praesent nec ipsum ac velit suscipit dignissim.
-              Suspendisse leo metus, venenatis ac maximus sit amet,
-              convallis id diam. Vestibulum blandit ligula ipsum, eget
-              rhoncus ex auctor sit amet. Phasellus et pharetra nisl,
-              eget tristique turpis. Nam ut rutrum felis.
+              Meaning: Send init, then repeat (receive get, send id). Catches multiple inits or omitted responses.
             </p>
           </div>
         </Col>
@@ -164,15 +91,12 @@ function BehaviouralTypes() {
             <h2 className="h4 fw-semibold mb-4">
               Relation to Erlang and Summary
             </h2>
-            <div className="mx-auto" style={{ maxWidth: '800px' }}>
+            <div className="mx-auto" style={{ maxWidth: '600px' }}>
               <p className="mb-3" style={{ lineHeight: '1.6', fontSize: '0.95rem' }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id tristique nulla. Sed sit amet libero diam. Donec dapibus condimentum est. Morbi vestibulum diam sit amet erat vestibulum, sed porttitor velit consequat. Nunc eget est iaculis, hendrerit ex nec, placerat sem. In commodo, eros in condimentum imperdiet, sapien orci rutrum elit, nec auctor velit tortor vel nunc. Aliquam tincidunt vel nulla ut volutpat. Vivamus pellentesque nunc vel neque molestsuodo, et dapibus lorem eleifend. Cras sodales lorem libero, et dignissim sem convallis sed. Suspendisse egestas semper magna pharetra placerat. Sed ullamcorper dolor pharetra velit condimentum, euismod gravida lorem sodales.
-              </p>
-              <p className="mb-3" style={{ lineHeight: '1.6', fontSize: '0.95rem' }}>
-                Praesent nec ipsum ac velit suscipit dignissim. Suspendisse leo metus, venenatis ac maximus sit amet, convallis id diam. Vestibulum blandit ligula ipsum, eget rhoncus ex auctor sit amet. Phasellus et pharetra nisl, eget tristique turpis. Nam ut rutrum felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id tristique nulla. Sed sit amet libero diam. Donec dapibus condimentum est. Morbi vestibulum diam sit amet erat vestibulum, sed porttitor velit consequat.
+                Erlang lacks built-in protocol compliance mechanisms, leading to communication bugs like deadlocks and resource leaks.
               </p>
               <p style={{ lineHeight: '1.6', fontSize: '0.95rem' }}>
-                Nunc eget est iaculis, hendrerit ex nec, placerat sem. In commodo, eros in condimentum imperdiet, sapien orci rutrum elit, nec auctor velit tortor vel nunc. Aliquam tincidunt vel nulla ut volutpat. Vivamus pellentesque nunc vel neque molestsuodo, et dapibus lorem eleifend. Cras sodales lorem libero, et dignissim sem convallis sed. Suspendisse egestas semper magna pharetra placerat.
+                Behavioural types provide formal protocol specifications, integrated via type checkers or runtime monitors. This enables early error detection and more reliable concurrent programs.
               </p>
             </div>
           </div>

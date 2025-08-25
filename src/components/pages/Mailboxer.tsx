@@ -14,28 +14,12 @@ function Mailboxer() {
         </Col>
       </Row>
 
-      {/* Intro and Diagram Section */}
+      {/* Intro Section */}
       <Row className="mb-5">
-        <Col md={6}>
-          <h3 className="h6 fw-semibold mb-3">Intro paragraph</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id
-            tristique nulla. Sed sit amet libero diam. Donec dapibus condimentum
-            est. Morbi vestibulum diam sit amet erat vestibulum, sed porttitor
-            velit consequat. Nunc eget est iaculis, hendrerit ex nec, placerat
-            sem.
+        <Col>
+          <p className="lead text-center">
+            <strong>Mailboxer</strong> is a runtime verification tool for actor-based programs that integrates mailbox types with Erlang. It provides compile-time and runtime checking of communication protocols, preventing deadlocks, protocol violations, and message type mismatches.
           </p>
-        </Col>
-        <Col md={6}>
-          <div className="text-center p-4 border rounded bg-light">
-            <p className="text-muted mb-0">
-              (Some sort of diagram showing
-              <br />
-              Mailboxer and how it fits in the Actor
-              <br />
-              model workflow)
-            </p>
-          </div>
         </Col>
       </Row>
 
@@ -51,18 +35,18 @@ function Mailboxer() {
               <h3 className="h5 fw-semibold mb-3">Server</h3>
               <div className="code-pane position-relative">
                 <pre className="code-block" style={{ height: '400px', overflow: 'auto' }}>
-                  {`-new id_server.
--spec id_server() → unit.
+                  <span style={{ color: '#0066cc', fontWeight: 'bold' }}>-new id_server.</span>{`
+`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-spec id_server() → unit.</span>{`
 id_server() →
-  assert("init.get*"),
+  `}<span style={{ color: '#cc6600', fontWeight: 'bold' }}>assert("init.get*")</span>{`,
   receive
     {init, N} → id_server_loop(N)
   end.
 
--use id_server.
--spec id_server_loop(int) → unit.
+`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-use id_server.</span>{`
+`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-spec id_server_loop(int) → unit.</span>{`
 id_server_loop(N) →
-  assert("get*"),
+  `}<span style={{ color: '#cc6600', fontWeight: 'bold' }}>assert("get*")</span>{`,
   receive
     {get, Client} →
       Client ! {id, N},
@@ -76,14 +60,14 @@ id_server_loop(N) →
               <h3 className="h5 fw-semibold mb-3">Client</h3>
               <div className="code-pane position-relative">
                 <pre className="code-block" style={{ height: '400px' }}>
-                  {`-new id_client.
--spec client() → unit.
+                  <span style={{ color: '#0066cc', fontWeight: 'bold' }}>-new id_client.</span>{`
+`}<span style={{ color: '#0066cc', fontWeight: 'bold' }}>-spec client() → unit.</span>{`
 client() →
   Server = spawn {id_server, []},
   
   Server ! {init, 5},
   Server ! {get, self},
-  assert("id"),
+  `}<span style={{ color: '#cc6600', fontWeight: 'bold' }}>assert("id")</span>{`,
   receive
     {id, Id} → print Id
   end.`}
@@ -94,19 +78,42 @@ client() →
         </Col>
       </Row>
 
-      {/* Key Features Section */}
-      <Row>
+      {/* Mailbox Types Section */}
+      <Row className="mb-5">
         <Col>
-          <h3 className="h5 fw-semibold mb-3">Key Features</h3>
-          <ul className="list-unstyled">
-            <li className="mb-2">- Talk about mailbox types</li>
-            <li className="mb-2">- Talk about base type support</li>
-            <li className="mb-2">- Talk about useable vs returnable types</li>
-            <li className="mb-2">
-              - Talk about basic language features of Pat and how it works with
-              Erlang
-            </li>
-          </ul>
+          <h2 className="h4 fw-semibold mb-3">Mailbox Types</h2>
+          <p>
+            Mailbox types are behavioral specifications that describe expected message sequences between processes. They use regular expression syntax: <code>!msg(type)</code> (send), <code>?msg(type)</code> (receive), <code>*</code> (zero or more), <code>.</code> (sequence).
+          </p>
+          <p>
+            <strong>Key Benefits:</strong> Protocol verification, deadlock prevention, message type safety, runtime monitoring, and executable documentation.
+          </p>
+        </Col>
+      </Row>
+
+      {/* Pat Language Section */}
+      <Row className="mb-5">
+        <Col>
+          <h2 className="h4 fw-semibold mb-3">Pat Language</h2>
+          <p>
+            Pat extends Erlang with mailbox type annotations: <code>-new</code> (declares new type), <code>-use</code> (references existing type), <code>-spec</code> (function signatures), <code>assert("pattern")</code> (expected message patterns).
+          </p>
+          <p>
+            <strong>Erlang Integration:</strong> Compatible with existing code, compiles to standard bytecode, integrates with OTP.
+          </p>
+        </Col>
+      </Row>
+
+      {/* Key Features Section */}
+      <Row className="mb-5">
+        <Col>
+          <h2 className="h4 fw-semibold mb-3">Key Features</h2>
+          <p>
+            <strong>Static Analysis:</strong> Compile-time protocol checking, type inference, deadlock detection, protocol compatibility verification.
+          </p>
+          <p>
+            <strong>Runtime Verification:</strong> Dynamic monitoring, detailed error reporting, graceful degradation, minimal performance overhead.
+          </p>
         </Col>
       </Row>
     </Container>

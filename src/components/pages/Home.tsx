@@ -13,10 +13,10 @@ function Home() {
         <Col>
           <div className="text-center">
             <h1 className="display-5 mb-4 fw-bold">
-              Understanding and Debugging Actor Communication Errors
+              Programming with Mailbox Types
             </h1>
             <p className="lead">
-              Learn and explore Mailboxer
+              Prevent actor communication errors with behavioral type verification
             </p>
           </div>
         </Col>
@@ -32,28 +32,10 @@ function Home() {
                 Learn Actor Communication Errors
               </Card.Title>
               <Card.Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id tristique nulla. Sed sit 
-                amet libero diam. Donec dapibus condimentum est. Morbi vestibulum diam sit 
-                amet erat vestibulum, sed porttitor velit consequat. Nunc eget est iaculis, hendrerit ex 
-                nec, placerat sem. In commodo, eros in condimentum imperdiet, sapien orci rutrum 
-                aliquam, vel cursus tortor vel nunc. Aliquam 
-                tincidunt vel nulla ut volutpat. Vivamus 
-                pellentesque nunc vel neque molestsuodo, et 
-                dapibus lorem eleifend. Cras sodales lorem 
-                libero, et dignissim sem convallis sed.
+                Discover the common communication errors that occur in actor-based systems like Erlang. Learn about message type errors and behavioral type violations that can cause deadlocks and system failures.
               </Card.Text>
               <Card.Text>
-                Suspendisse egestas semper magna pharetra 
-                placerat. Sed ullamcorper dolor pharetra velit 
-                condimentum, euismod gravida lorem sodales.
-              </Card.Text>
-              <Card.Text>
-                Praesent nec ipsum ac velit suscipit dignissim. 
-                Suspendisse leo metus, venenatis ac maximus 
-                sit amet, convallis id diam. Vestibulum blandit 
-                ligula ipsum, eget rhoncus ex auctor sit amet. 
-                Phasellus et pharetra nisl, eget tristique turpis. 
-                Nam ut rutrum felis.
+                Explore real examples of payload mismatches, unsupported requests, unexpected messages, and omitted replies through interactive code examples.
               </Card.Text>
               <div className="mt-auto text-center">
                 <Link to="/actor-communication-errors" className="btn btn-outline-primary">
@@ -68,36 +50,14 @@ function Home() {
         <Col lg={3} md={6} sm={12}>
           <Card className="h-100 card">
             <Card.Body className="d-flex flex-column">
-              <Card.Title className="h5 fw-semibold mb-3">
+              <Card.Title className="h6 fw-semibold mb-3">
                 Learn Behavioural Types
               </Card.Title>
               <Card.Text>
-                Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit. Etiam id tristique nulla. Sed sit 
-                amet libero diam. Donec dapibus 
-                condimentum est. Morbi vestibulum diam sit 
-                amet erat vestibulum, sed porttitor velit 
-                consequat. Nunc eget est iaculis, hendrerit ex 
-                nec, placerat sem. In commodo, eros in 
-                condimentum imperdiet, sapien orci rutrum 
-                aliquam, vel cursus tortor vel nunc. Aliquam 
-                tincidunt vel nulla ut volutpat. Vivamus 
-                pellentesque nunc vel neque molestsuodo, et 
-                dapibus lorem eleifend. Cras sodales lorem 
-                libero, et dignissim sem convallis sed.
+                Understand behavioral types - formal specifications that describe communication patterns between concurrent processes in actor systems.
               </Card.Text>
               <Card.Text>
-                Suspendisse egestas semper magna pharetra 
-                placerat. Sed ullamcorper dolor pharetra velit 
-                condimentum, euismod gravida lorem sodales.
-              </Card.Text>
-              <Card.Text>
-                Praesent nec ipsum ac velit suscipit dignissim. 
-                Suspendisse leo metus, venenatis ac maximus 
-                sit amet, convallis id diam. Vestibulum blandit 
-                ligula ipsum, eget rhoncus ex auctor sit amet. 
-                Phasellus et pharetra nisl, eget tristique turpis. 
-                Nam ut rutrum felis.
+                Learn how behavioral types differ from traditional data types and how they prevent protocol violations, deadlocks, and communication errors at compile-time.
               </Card.Text>
               <div className="mt-auto text-center">
                 <Link to="/behavioural-types" className="btn btn-outline-primary">
@@ -116,32 +76,10 @@ function Home() {
                 Explore Mailboxer
               </Card.Title>
               <Card.Text>
-                Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit. Etiam id tristique nulla. Sed sit 
-                amet libero diam. Donec dapibus 
-                condimentum est. Morbi vestibulum diam sit 
-                amet erat vestibulum, sed porttitor velit 
-                consequat. Nunc eget est iaculis, hendrerit ex 
-                nec, placerat sem. In commodo, eros in 
-                condimentum imperdiet, sapien orci rutrum 
-                aliquam, vel cursus tortor vel nunc. Aliquam 
-                tincidunt vel nulla ut volutpat. Vivamus 
-                pellentesque nunc vel neque molestsuodo, et 
-                dapibus lorem eleifend. Cras sodales lorem 
-                libero, et dignissim sem convallis sed.
+                Discover Mailboxer - a runtime verification tool that integrates mailbox types with Erlang to prevent actor communication errors.
               </Card.Text>
               <Card.Text>
-                Suspendisse egestas semper magna pharetra 
-                placerat. Sed ullamcorper dolor pharetra velit 
-                condimentum, euismod gravida lorem sodales.
-              </Card.Text>
-              <Card.Text>
-                Praesent nec ipsum ac velit suscipit dignissim. 
-                Suspendisse leo metus, venenatis ac maximus 
-                sit amet, convallis id diam. Vestibulum blandit 
-                ligula ipsum, eget rhoncus ex auctor sit amet. 
-                Phasellus et pharetra nisl, eget tristique turpis. 
-                Nam ut rutrum felis.
+                Learn about the Pat language extension, mailbox type annotations, and how static analysis and runtime monitoring work together.
               </Card.Text>
               <div className="mt-auto text-center">
                 <Link to="/mailboxer" className="btn btn-outline-primary">
@@ -160,32 +98,10 @@ function Home() {
                 Experiment in Sandbox
               </Card.Title>
               <Card.Text>
-                Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit. Etiam id tristique nulla. Sed sit 
-                amet libero diam. Donec dapibus 
-                condimentum est. Morbi vestibulum diam sit 
-                amet erat vestibulum, sed porttitor velit 
-                consequat. Nunc eget est iaculis, hendrerit ex 
-                nec, placerat sem. In commodo, eros in 
-                condimentum imperdiet, sapien orci rutrum 
-                aliquam, vel cursus tortor vel nunc. Aliquam 
-                tincidunt vel nulla ut volutpat. Vivamus 
-                pellentesque nunc vel neque molestsuodo, et 
-                dapibus lorem eleifend. Cras sodales lorem 
-                libero, et dignissim sem convallis sed.
+                Try Mailboxer in an interactive sandbox environment. Write Pat code with mailbox type annotations and see real-time verification results.
               </Card.Text>
               <Card.Text>
-                Suspendisse egestas semper magna pharetra 
-                placerat. Sed ullamcorper dolor pharetra velit 
-                condimentum, euismod gravida lorem sodales.
-              </Card.Text>
-              <Card.Text>
-                Praesent nec ipsum ac velit suscipit dignissim. 
-                Suspendisse leo metus, venenatis ac maximus 
-                sit amet, convallis id diam. Vestibulum blandit 
-                ligula ipsum, eget rhoncus ex auctor sit amet. 
-                Phasellus et pharetra nisl, eget tristique turpis. 
-                Nam ut rutrum felis.
+                Experiment with different communication patterns, introduce errors, and learn how Mailboxer detects and reports protocol violations.
               </Card.Text>
               <div className="mt-auto text-center">
                 <Link to="/sandbox" className="btn btn-outline-primary">
