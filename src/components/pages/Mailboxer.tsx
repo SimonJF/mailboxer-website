@@ -38,7 +38,7 @@ function Mailboxer() {
 
           <div className="code-pane position-relative">
             <pre className="code-block mailboxer-code-block">
-              <span className="syntax-comment">% MAILBOX TYPES</span>
+              <span className="syntax-comment">% ID SERVER EXAMPLE WITH MAILBOX TYPES</span>
               {`
 `}
               <span className="syntax-type">
@@ -90,6 +90,7 @@ function Mailboxer() {
               </span>
               {`
 id_server() ->
+  % Mailbox type
   `}
               <span className="syntax-directive">
                 ?expects(id_server_mb, "Init.*Get")
@@ -105,6 +106,7 @@ id_server() ->
               </span>
               {`
 id_server_loop(N) ->
+  % Mailbox type
   `}
               <span className="syntax-directive">?expects("*Get")</span>
               {`,
@@ -125,6 +127,7 @@ id_server_loop(N) ->
 id_client(Server) ->
   Self = self(),
   Server ! {get, Self},
+  % Mailbox type
   `}
               <span className="syntax-directive">
                 ?expects(id_client_mb, "Id")
@@ -164,6 +167,19 @@ main() ->
           <p>
             <strong>Properties:</strong> Static protocol verification, deadlock
             detection, type safety, compile-time compliance checking.
+          </p>
+          
+          <h4 className="mt-4 mb-3">Mailbox Type Definition</h4>
+          <p>
+            A mailbox type defines the sequence and pattern of messages that can be in an actor's mailbox at any given time. For example:
+          </p>
+          <p>
+            First, we define message structures with <code>{`-type id_server_mb() :: pid() | init() | get().`}</code>. Then we declare a new mailbox with 
+            <code>{`-new({id_server_mb, [id_server/0]})`}</code>. The actual <strong>mailbox type</strong> is specified using 
+            <code>{`?expects(id_server_mb, "Init.*Get")`}</code>, which enforces the protocol pattern.
+          </p>
+          <p>
+            This mailbox type ensures the ID server can only receive <code>init</code> messages followed by any number of <code>get</code> messages, preventing protocol violations.
           </p>
           <p className="mt-3">
             <strong>References:</strong>
