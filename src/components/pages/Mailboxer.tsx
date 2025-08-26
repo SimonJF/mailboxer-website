@@ -174,9 +174,13 @@ main() ->
             A mailbox type defines the sequence and pattern of messages that can be in an actor's mailbox at any given time. For example:
           </p>
           <p>
-            First, we define message structures with <code>{`-type id_server_mb() :: pid() | init() | get().`}</code>. Then we declare a new mailbox with 
-            <code>{`-new({id_server_mb, [id_server/0]})`}</code>. The actual <strong>mailbox type</strong> is specified using 
-            <code>{`?expects(id_server_mb, "Init.*Get")`}</code>, which enforces the protocol pattern.
+            First, we define message structures with <code>{`-type id_server_mb() :: pid() | init() | get().`}</code>.
+          </p>
+          <p>
+            Then we declare a new mailbox with <code>{`-new({id_server_mb, [id_server/0]})`}</code>.
+          </p>
+          <p>
+            The actual <strong>mailbox type</strong> is specified using <code>{`?expects(id_server_mb, "Init.*Get")`}</code>, which enforces the protocol pattern.
           </p>
           <p>
             This mailbox type ensures the ID server can only receive <code>init</code> messages followed by any number of <code>get</code> messages, preventing protocol violations.
