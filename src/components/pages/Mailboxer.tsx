@@ -20,9 +20,9 @@ function Mailboxer() {
       <Row className="mb-5">
         <Col>
           <p className="lead text-center">
-            <strong>Mailboxer</strong> is a runtime verification tool for
-            actor-based programs that integrates mailbox types with Erlang. It
-            provides compile-time and runtime checking of communication
+            <strong>Mailboxer</strong> is a static (compile-time) verification
+            tool for actor-based programs that integrates mailbox types with
+            Erlang. It provides compile-time checking of communication
             protocols, preventing deadlocks, protocol violations, and message
             type mismatches.
           </p>
@@ -155,45 +155,38 @@ main() ->
         <Col>
           <h2 className="h4 fw-semibold mb-3">Mailbox Types</h2>
           <p>
-            Behavioral type specifications for message-passing protocols using
-            regular expression syntax: <code>!msg(type)</code> (send),{" "}
-            <code>?msg(type)</code> (receive), <code>*</code> (repetition),{" "}
-            <code>.</code> (sequencing).
+            Mailbox types are a novel behavioural type system for mailboxes,
+            first introduced by de'Liguoro and Padovani in 2018 [1]. These types
+            capture mailbox contents as a commutative regular expression,
+            providing a formal way to specify and verify communication protocols
+            in actor-based systems [2].
           </p>
           <p>
             <strong>Properties:</strong> Static protocol verification, deadlock
-            detection, type safety, runtime compliance checking.
+            detection, type safety, compile-time compliance checking.
           </p>
-        </Col>
-      </Row>
-
-      {/* Details about the Pat language extension for Erlang */}
-      <Row className="mb-5">
-        <Col>
-          <h2 className="h4 fw-semibold mb-3">Pat Language Extension</h2>
-          <p>
-            Minimal Erlang extension with annotations: <code>-new</code> (type
-            declaration), <code>-use</code> (type reference),{" "}
-            <code>?expects(pattern)</code> (protocol assertion).
-          </p>
-          <p>
-            <strong>Implementation:</strong> Source-to-source transformation,
-            standard BEAM bytecode generation, OTP compatibility.
-          </p>
-        </Col>
-      </Row>
-
-      {/* Overview of static and runtime verification methods */}
-      <Row className="mb-5">
-        <Col>
-          <h2 className="h4 fw-semibold mb-3">Verification Approach</h2>
-          <p>
-            <strong>Static Analysis:</strong> Compile-time protocol checking,
-            type inference, deadlock detection.
-          </p>
-          <p>
-            <strong>Runtime Monitoring:</strong> Dynamic compliance checking,
-            violation reporting, minimal overhead.
+          <p className="mt-3">
+            <strong>References:</strong>
+            <br />
+            [1]{" "}
+            <a
+              href="https://arxiv.org/pdf/1801.04167"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              de'Liguoro and Padovani (2018) - Mailbox Types for Unordered
+              Interactions
+            </a>
+            <br />
+            [2]{" "}
+            <a
+              href="https://simonjf.com/writing/pat.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Fowler et al. (2023) - Special Delivery: Programming with Mailbox
+              Types
+            </a>
           </p>
         </Col>
       </Row>

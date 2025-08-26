@@ -88,7 +88,7 @@ id_server_loop(N) ->
             The client sends a message with an incorrect or unrecognized tag.
             Here, <code>{`{gte, self}`}</code> instead of{" "}
             <code>{`{get, self}`}</code> becomes mailbox junk that will never be
-            processed.
+            retrieved from the mailbox.
           </p>
 
           <h3 className="mt-4 mb-3">Impact</h3>

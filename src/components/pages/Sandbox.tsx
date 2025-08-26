@@ -234,10 +234,10 @@ function Sandbox() {
                 {isRunning ? (
                   <>
                     <Spinner animation="border" size="sm" className="me-2" />
-                    Running Analysis...
+                    Running Mailboxer...
                   </>
                 ) : (
-                  'Run Analysis'
+                  'Run Mailboxer'
                 )}
               </Button>
               

@@ -86,12 +86,10 @@ id_server_loop(N) ->
 
           <h3 className="mb-3">Two Types of Communication Errors</h3>
           <p className="mb-3">
-            <strong>Message Type Errors:</strong> Wrong message format or
-            payload type (e.g., sending string instead of integer).
+            <strong>Message Type Errors:</strong> Wrong message tag or payload type. Errors that occur when message structure or payload types don't match the declared type.
           </p>
           <p>
-            <strong>Behavioural Type Errors:</strong> Correct message at wrong
-            time in protocol (e.g., multiple init calls or missing responses).
+            <strong>Behavioural Type Errors:</strong> Errors that occur when a sequence of messages don't conform to the protocol.
           </p>
         </Col>
       </Row>
@@ -102,8 +100,7 @@ id_server_loop(N) ->
           <div className="pe-3">
             <h3 className="text-center mb-3">Message Type Errors</h3>
             <p className="text-center mb-4">
-              Errors that occur when message structure or payload types don't
-              match expectations
+              Errors that occur when message structure or payload types don't match the declared type
             </p>
 
             <div className="d-flex flex-column gap-2">
@@ -127,8 +124,7 @@ id_server_loop(N) ->
           <div className="ps-3 border-start">
             <h3 className="text-center mb-3">Behavioural Type Errors</h3>
             <p className="text-center mb-4">
-              Errors that occur when messages arrive at inappropriate times in
-              the protocol
+              Errors that occur when a sequence of messages don't conform to the protocol
             </p>
 
             <div className="d-flex flex-column gap-2">

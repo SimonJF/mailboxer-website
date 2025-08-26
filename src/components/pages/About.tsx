@@ -55,14 +55,24 @@ function About() {
             <h6 className="mb-3">Academic Resources</h6>
             <div className="mb-3">
               <a
+                href="https://arxiv.org/pdf/1801.04167"
+                className="me-3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Mailbox Types for Unordered Interactions
+              </a>
+              <span className="me-3">|</span>
+              <a
                 href="https://simonjf.com/writing/pat.pdf"
                 className="me-3"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Pat Paper
+                Special Delivery: Programming with Mailbox Types
               </a>
-              <span className="me-3">|</span>
+            </div>
+            <div className="mb-3">
               <a
                 href="https://epsrc-stardust.github.io/"
                 className="me-3"
@@ -78,7 +88,7 @@ function About() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                All Papers
+                All STARDUST Papers
               </a>
             </div>
           </div>
