@@ -1,11 +1,21 @@
+import hljs from 'highlight.js/lib/core';
+import erlang from 'highlight.js/lib/languages/erlang';
+import 'highlight.js/styles/github.css';
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// Register the Erlang language
+hljs.registerLanguage('erlang', erlang);
 
 // Page explaining actor communication errors with code examples
 function ActorCommunicationErrors() {
   useEffect(() => {
     document.title = "Actor Communication Errors - Mailboxer";
+    // Initialize syntax highlighting
+    document.querySelectorAll('pre.code-block').forEach((block) => {
+      hljs.highlightElement(block as HTMLElement);
+    });
   }, []);
   return (
     <Container className="py-5">
@@ -20,11 +30,13 @@ function ActorCommunicationErrors() {
 
       {/* Code examples showing server and client implementation */}
       <Row className="mb-5">
-        <Col md={6}>
-          <h5 className="mb-2">Server</h5>
-          <div className="code-pane position-relative">
-            <pre className="code-block">
-              {`id_server() ->
+        <Col>
+          <Row className="mb-4">
+            <Col md={6}>
+              <h3 className="h5 fw-semibold mb-4">Server Implementation</h3>
+              <div className="code-pane position-relative">
+                <pre className="code-block language-erlang">
+                  {`id_server() ->
   receive
     {init, N} -> id_server_loop(N)
   end.
@@ -36,15 +48,15 @@ id_server_loop(N) ->
       id_server_loop(N + 1);
     {init, _} -> error
   end.`}
-            </pre>
-          </div>
-        </Col>
+                </pre>
+              </div>
+            </Col>
 
-        <Col md={6}>
-          <h5 className="mb-2">Client</h5>
-          <div className="code-pane position-relative">
-            <pre className="code-block">
-              {`client() ->
+            <Col md={6}>
+              <h3 className="h5 fw-semibold mb-4">Client Implementation</h3>
+              <div className="code-pane position-relative">
+                <pre className="code-block language-erlang">
+                  {`client() ->
 
   % Create server.
   Server = spawn {id_server, []},
@@ -56,8 +68,10 @@ id_server_loop(N) ->
   receive
     {id, Id} -> print Id
   end.`}
-            </pre>
-          </div>
+                </pre>
+              </div>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
@@ -99,7 +113,7 @@ id_server_loop(N) ->
         <Col md={6}>
           <div className="pe-3">
             <h3 className="text-center mb-3">Message Type Errors</h3>
-            <p className="text-center mb-4">
+            <p className="text-center mb-4 error-type-description">
               Errors that occur when message structure or payload types don't match the declared type
             </p>
 
@@ -123,7 +137,7 @@ id_server_loop(N) ->
         <Col md={6}>
           <div className="ps-3 border-start">
             <h3 className="text-center mb-3">Behavioural Type Errors</h3>
-            <p className="text-center mb-4">
+            <p className="text-center mb-4 error-type-description">
               Errors that occur when a sequence of messages don't conform to the protocol
             </p>
 

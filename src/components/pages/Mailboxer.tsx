@@ -1,11 +1,21 @@
+import hljs from 'highlight.js/lib/core';
+import erlang from 'highlight.js/lib/languages/erlang';
+import 'highlight.js/styles/github.css';
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// Register the Erlang language
+hljs.registerLanguage('erlang', erlang);
 
 // Page explaining what Mailboxer is and how it works with code examples
 function Mailboxer() {
   useEffect(() => {
     document.title = "What is Mailboxer? - Mailboxer";
+    // Initialize syntax highlighting
+    document.querySelectorAll('pre.code-block').forEach((block) => {
+      hljs.highlightElement(block as HTMLElement);
+    });
   }, []);
   return (
     <Container className="py-5 mailboxer-container">
@@ -37,112 +47,50 @@ function Mailboxer() {
           </h2>
 
           <div className="code-pane position-relative">
-            <pre className="code-block mailboxer-code-block">
-              <span className="syntax-comment">% ID SERVER EXAMPLE WITH MAILBOX TYPES</span>
-              {`
-`}
-              <span className="syntax-type">
-                -type init() :: {"{"}init, integer(){"}"}.
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -type get() :: {"{"}get, id_client_mb(){"}"}.
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -type id() :: {"{"}id, integer(){"}"}.
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -type id_server_mb() :: pid() | init() | get().
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -type id_client_mb() :: pid() | id().
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -new({"{"}id_server_mb, [id_server/0]{"}"}).
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -use({"{"}id_server_mb, [id_server_loop/1]{"}"}).
-              </span>
-              {`
-`}
-              <span className="syntax-type">
-                -new({"{"}id_client_mb, [id_client/1]{"}"}).
-              </span>
-              {`
+            <pre className="code-block language-erlang">{`% ID SERVER EXAMPLE WITH MAILBOX TYPES
 
-`}
-              <span className="syntax-comment">% SERVER</span>
-              {`
-`}
-              <span className="syntax-type">
-                -spec id_server() -&gt; no_return().
-              </span>
-              {`
+-type init() :: {init, integer()}.
+-type get() :: {get, id_client_mb()}.
+-type id() :: {id, integer()}.
+-type id_server_mb() :: pid() | init() | get().
+-type id_client_mb() :: pid() | id().
+
+-new({id_server_mb, [id_server/0]}).
+-use({id_server_mb, [id_server_loop/1]}).
+-new({id_client_mb, [id_client/1]}).
+
+% SERVER
+-spec id_server() -> no_return().
 id_server() ->
   % Mailbox type
-  `}
-              <span className="syntax-directive">
-                ?expects(id_server_mb, "Init.*Get")
-              </span>
-              {`,
+  ?expects(id_server_mb, "Init.*Get"),
   receive
     {init, N} -> id_server_loop(N)
   end.
 
-`}
-              <span className="syntax-type">
-                -spec id_server_loop(integer()) -&gt; no_return().
-              </span>
-              {`
+-spec id_server_loop(integer()) -> no_return().
 id_server_loop(N) ->
   % Mailbox type
-  `}
-              <span className="syntax-directive">?expects("*Get")</span>
-              {`,
+  ?expects("*Get"),
   receive
     {get, Client} ->
       Client ! {id, N},
       id_server_loop(N + 1)
   end.
 
-`}
-              <span className="syntax-comment">% CLIENT</span>
-              {`
-`}
-              <span className="syntax-type">
-                -spec id_client(id_server_mb()) -&gt; integer().
-              </span>
-              {`
+% CLIENT
+-spec id_client(id_server_mb()) -> integer().
 id_client(Server) ->
   Self = self(),
   Server ! {get, Self},
   % Mailbox type
-  `}
-              <span className="syntax-directive">
-                ?expects(id_client_mb, "Id")
-              </span>
-              {`,
+  ?expects(id_client_mb, "Id"),
   receive
     {id, Id} -> Id
   end.
 
-`}
-              <span className="syntax-comment">% MAIN</span>
-              {`
-`}
-              <span className="syntax-type">-spec main() -&gt; any().</span>
-              {`
+% MAIN
+-spec main() -> any().
 main() ->
   Server = spawn(?MODULE, id_server, []),
   Server ! {init, 5},

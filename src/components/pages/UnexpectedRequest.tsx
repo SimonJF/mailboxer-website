@@ -1,11 +1,21 @@
+import hljs from 'highlight.js/lib/core';
+import erlang from 'highlight.js/lib/languages/erlang';
+import 'highlight.js/styles/github.css';
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// Register the Erlang language
+hljs.registerLanguage('erlang', erlang);
 
 // Page explaining the unexpected request communication error with code examples
 function UnexpectedRequest() {
   useEffect(() => {
     document.title = "Unexpected Request - Mailboxer";
+    // Initialize syntax highlighting
+    document.querySelectorAll('pre.code-block').forEach((block) => {
+      hljs.highlightElement(block as HTMLElement);
+    });
   }, []);
 
   return (
@@ -30,7 +40,7 @@ function UnexpectedRequest() {
             <Col md={6}>
               <h5 className="mb-2">Server</h5>
               <div className="code-pane position-relative">
-                <pre className="code-block">
+                <pre className="code-block language-erlang">
                   {`id_server() ->
   receive
     {init, N} -> id_server_loop(N)
@@ -51,7 +61,7 @@ id_server_loop(N) ->
             <Col md={6}>
               <h5 className="mb-2">Client</h5>
               <div className="code-pane position-relative">
-                <pre className="code-block">
+                <pre className="code-block language-erlang">
                   {`client() ->
 
   % Create server.

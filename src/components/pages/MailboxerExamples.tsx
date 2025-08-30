@@ -1,11 +1,21 @@
+import hljs from 'highlight.js/lib/core';
+import erlang from 'highlight.js/lib/languages/erlang';
+import 'highlight.js/styles/github.css';
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// Register the Erlang language
+hljs.registerLanguage('erlang', erlang);
 
 // Page showing practical examples of communication errors detected by Mailboxer
 function MailboxerExamples() {
   useEffect(() => {
     document.title = "Examples - Mailboxer";
+    // Initialize syntax highlighting
+    document.querySelectorAll('pre.code-block').forEach((block) => {
+      hljs.highlightElement(block as HTMLElement);
+    });
   }, []);
   return (
     <Container className="py-5 examples-container">
@@ -43,15 +53,16 @@ function MailboxerExamples() {
           {/* Code snippet showing the error and Mailboxer's error output */}
           <Row className="mb-4">
             <Col md={6}>
+              <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-small">
-                <pre className="code-block examples-code-block">
+                <pre className="code-block examples-code-block language-erlang">
                   {`Server ! {init, 5},
 Server ! {init, 5},  % ← Extra initialization`}
                 </pre>
               </div>
             </Col>
             <Col md={6}>
-              <h4 className="h6 fw-semibold mb-2">Mailboxer Output</h4>
+              <h3 className="h5 fw-semibold mb-4">Mailboxer Output</h3>
               <div className="p-3 border rounded bg-danger-subtle">
                 <code className="text-danger">
                   3. Error: Inferred message pattern from code '(Init . (Init .
@@ -77,8 +88,9 @@ Server ! {init, 5},  % ← Extra initialization`}
           {/* Code snippet showing the error and Mailboxer's error output */}
           <Row className="mb-4">
             <Col md={6}>
+              <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-small">
-                <pre className="code-block examples-code-block">
+                <pre className="code-block examples-code-block language-erlang">
                   {`{get, Client} →
   % Client ! {id, N}, ← Missing reply
   id_server_loop(N + 1);`}
@@ -86,7 +98,7 @@ Server ! {init, 5},  % ← Extra initialization`}
               </div>
             </Col>
             <Col md={6}>
-              <h4 className="h6 fw-semibold mb-2">Mailboxer Output</h4>
+              <h3 className="h5 fw-semibold mb-4">Mailboxer Output</h3>
               <div className="p-3 border rounded bg-danger-subtle">
                 <code className="text-danger">
                   3. Error: Inferred from code an empty mailbox but expecting a
@@ -112,14 +124,15 @@ Server ! {init, 5},  % ← Extra initialization`}
           {/* Code snippet showing the error and Mailboxer's error output */}
           <Row className="mb-4">
             <Col md={6}>
+              <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-medium">
-                <pre className="code-block examples-code-block">
+                <pre className="code-block examples-code-block language-erlang">
                   {`Server ! {init, "5"},  % ← String "5" instead of integer 5`}
                 </pre>
               </div>
             </Col>
             <Col md={6}>
-              <h4 className="h6 fw-semibold mb-2">Mailboxer Output</h4>
+              <h3 className="h5 fw-semibold mb-4">Mailboxer Output</h3>
               <div className="p-3 border rounded bg-danger-subtle">
                 <code className="text-danger">
                   3. Error: Type mismatch. Expected Int but got String.
@@ -142,14 +155,15 @@ Server ! {init, 5},  % ← Extra initialization`}
           {/* Code snippet showing the error and Mailboxer's error output */}
           <Row className="mb-4">
             <Col md={6}>
+              <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-large">
-                <pre className="code-block examples-code-block-large">
+                <pre className="code-block examples-code-block-large language-erlang">
                   {`Server ! {gte, self},  % ← "gte" instead of "get"`}
                 </pre>
               </div>
             </Col>
             <Col md={6}>
-              <h4 className="h4 fw-semibold mb-2">Mailboxer Output</h4>
+              <h3 className="h5 fw-semibold mb-4">Mailboxer Output</h3>
               <div className="p-3 border rounded bg-danger-subtle">
                 <code className="text-danger">
                   3. Error: Message tag Gte not supported by interface

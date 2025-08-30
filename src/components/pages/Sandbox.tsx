@@ -1,8 +1,44 @@
-import Editor from '@monaco-editor/react';
+import Editor, { loader } from '@monaco-editor/react';
+import type * as monacoEditor from 'monaco-editor';
+
+import hljs from 'highlight.js/lib/core';
+import erlang from 'highlight.js/lib/languages/erlang';
+import 'highlight.js/styles/github.css';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
 import type { ExampleFile, PaterlResult } from '../../services/paterlService';
 import { PaterlService } from '../../services/paterlService';
+
+// Register languages
+hljs.registerLanguage('erlang', erlang);
+
+// Configure Monaco Editor with Erlang language support
+loader.init().then((monacoInstance) => {
+  const monaco = monacoInstance;
+  // Register Erlang language
+  monaco.languages.register({ id: 'erlang' });
+
+  // Define Erlang syntax highlighting rules
+  const erlangLanguage = {
+    tokenizer: {
+      root: [
+        [/\b(module|export|import|behaviour|record|macro|include|define|when|if|case|receive|after|of|end|fun|try|catch|throw|begin|let|in|spawn|self|send|apply|call|whereis|register|unregister|exit|link|unlink|monitor|demonitor|andalso|orelse)\b/, 'keyword', ''],
+        [/[A-Z][a-zA-Z0-9_]*/, 'type', ''],
+        [/[a-z][a-zA-Z0-9_]*/, 'identifier', ''],
+        [/[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?/, 'number', ''],
+        [/'[^']*'/, 'string', ''],
+        [/"[^"]*"/, 'string', ''],
+        [/%.*/, 'comment', ''],
+        [/->|=>|:=|==|=:=|=\/=|>=|=<|<|>|\+|-|\*|\/|\+\+|--|\|\|/, 'operator', ''],
+        [/[.,;]/, 'delimiter', ''],
+        [/[{}()[\]]/, 'delimiter', ''],
+        [/[ \t\r\n]+/, 'white', '']
+      ]
+    }
+  }
+
+  monaco.languages.setMonarchTokensProvider('erlang', erlangLanguage as monacoEditor.languages.IMonarchLanguage);
+});
 
 // Interactive sandbox component for testing Mailboxer on example programs with communication errors
 function Sandbox() {
@@ -20,6 +56,10 @@ function Sandbox() {
     document.title = 'Sandbox - Mailboxer';
     // Load the initial example file
     loadExampleFile('id_server_code');
+    // Initialize syntax highlighting for inline code blocks
+    document.querySelectorAll('code').forEach((block) => {
+      hljs.highlightElement(block as HTMLElement);
+    });
   }, []);
 
   const loadExampleFile = async (exampleKey: string) => {
@@ -389,10 +429,10 @@ function Sandbox() {
                 <h6 className="fw-bold mb-0">Error Details:</h6>
                 {currentExample === 'combined_errors' ? (
                   <>
-                    <p className="mb-1 mt-2"><strong>Line 39:</strong> Omitted Reply - Missing response to client. <strong>Fix:</strong> Uncomment the line <code>Client ! {`{id, N}`},</code></p>
-                    <p className="mb-1"><strong>Line 56:</strong> Payload Mismatch - String instead of integer. <strong>Fix:</strong> Change <code>"5"</code> to <code>5</code></p>
-                    <p className="mb-1"><strong>Line 57:</strong> Unexpected Request - Extra init message. <strong>Fix:</strong> Remove the line <code>Server ! {`{init, 10}`},</code></p>
-                    <p className="mb-1"><strong>Line 58:</strong> Unsupported Request - Wrong message tag. <strong>Fix:</strong> Change <code>gte</code> to <code>get</code></p>
+                    <p className="mb-1 mt-2"><strong>Line 39:</strong> Omitted Reply - Missing response to client. <strong>Fix:</strong> Uncomment the line <code className="language-erlang">Client ! {`{id, N}`},</code></p>
+                    <p className="mb-1"><strong>Line 56:</strong> Payload Mismatch - String instead of integer. <strong>Fix:</strong> Change <code className="language-erlang">"5"</code> to <code className="language-erlang">5</code></p>
+                    <p className="mb-1"><strong>Line 57:</strong> Unexpected Request - Extra init message. <strong>Fix:</strong> Remove the line <code className="language-erlang">Server ! {`{init, 10}`},</code></p>
+                    <p className="mb-1"><strong>Line 58:</strong> Unsupported Request - Wrong message tag. <strong>Fix:</strong> Change <code className="language-erlang">gte</code> to <code className="language-erlang">get</code></p>
                   </>
                 ) : (
                   <>
