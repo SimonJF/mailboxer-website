@@ -446,9 +446,9 @@ function Sandbox() {
               {currentExample === 'combined_errors' && (
                 <>
                   <p className="mb-1 mt-2"><strong>Line 39:</strong> Omitted Reply - Missing response to client. <strong>Fix:</strong> Uncomment the line <code className="language-erlang">Client ! {`{id, N}`},</code></p>
+                  <p className="mb-1"><strong>Line 46:</strong> Unsupported Request - Wrong message tag. <strong>Fix:</strong> Change <code className="language-erlang">gte</code> to <code className="language-erlang">get</code></p>
                   <p className="mb-1"><strong>Line 56:</strong> Payload Mismatch - String instead of integer. <strong>Fix:</strong> Change <code className="language-erlang">"5"</code> to <code className="language-erlang">5</code></p>
                   <p className="mb-1"><strong>Line 57:</strong> Unexpected Request - Extra init message. <strong>Fix:</strong> Remove the line <code className="language-erlang">Server ! {`{init, 10}`},</code></p>
-                  <p className="mb-1"><strong>Line 58:</strong> Unsupported Request - Wrong message tag. <strong>Fix:</strong> Change <code className="language-erlang">gte</code> to <code className="language-erlang">get</code></p>
                 </>
               )}
               {currentExample === 'omitted_reply' && (
