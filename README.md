@@ -10,7 +10,8 @@ Interactive web interface for exploring actor communication patterns and behavio
 - React 19 + TypeScript
 - Vite (build tool)
 - Bootstrap 5 + React Bootstrap
-- Monaco Editor (code editor)
+- Monaco Editor (code editor with Erlang syntax)
+- Highlight.js (syntax highlighting)
 - React Router DOM
 
 **Backend:**

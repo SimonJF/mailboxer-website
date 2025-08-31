@@ -201,8 +201,34 @@ a:hover {
 
 .sandbox-example-button {
   border-radius: 4px;
-  min-width: 160px;
+  width: fit-content;
+  min-width: 120px;
+  max-width: 200px;
   font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Override Bootstrap's hover styles */
+.sandbox-example-button.btn-outline-secondary:hover {
+  background-color: rgba(108, 117, 125, 0.1);
+  color: #6c757d;
+}
+
+.sandbox-example-button.btn-outline-success:hover {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.sandbox-example-button.btn-outline-danger:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.sandbox-example-button.btn-outline-warning:hover {
+  background-color: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
 }
 
 .sandbox-example-button-text {

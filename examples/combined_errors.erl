@@ -43,7 +43,7 @@ id_server_loop(N) ->
 -spec id_client(id_server_mb()) -> integer().
 id_client(Server) ->
   Self = self(),
-  Server ! {gte, Self}, % Error: Unsupported Request
+  Server ! {gte, Self}, % <-- Error: Unsupported Request
   ?expects(id_client_mb, "Id"),
   receive
     {id, Id} ->

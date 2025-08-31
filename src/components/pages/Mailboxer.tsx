@@ -1,21 +1,16 @@
-import hljs from 'highlight.js/lib/core';
-import erlang from 'highlight.js/lib/languages/erlang';
-import 'highlight.js/styles/github.css';
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { highlightErlangCode, initErlangSyntax } from '../../config/erlangSyntax';
 
-// Register the Erlang language
-hljs.registerLanguage('erlang', erlang);
-
+// Initialize Erlang syntax highlighting
+initErlangSyntax();
 // Page explaining what Mailboxer is and how it works with code examples
 function Mailboxer() {
   useEffect(() => {
     document.title = "What is Mailboxer? - Mailboxer";
     // Initialize syntax highlighting
-    document.querySelectorAll('pre.code-block').forEach((block) => {
-      hljs.highlightElement(block as HTMLElement);
-    });
+    highlightErlangCode();
   }, []);
   return (
     <Container className="py-5 mailboxer-container">
@@ -47,7 +42,7 @@ function Mailboxer() {
           </h2>
 
           <div className="code-pane position-relative">
-            <pre className="code-block language-erlang">{`% ID SERVER EXAMPLE WITH MAILBOX TYPES
+            <pre><code className="language-erlang">{`% ID SERVER EXAMPLE WITH MAILBOX TYPES
 
 -type init() :: {init, integer()}.
 -type get() :: {get, id_client_mb()}.
@@ -96,7 +91,7 @@ main() ->
   Server ! {init, 5},
   Id = id_client(Server),
   format("Id: ~p~n", [Id]).`}
-            </pre>
+            </code></pre>
           </div>
         </Col>
       </Row>

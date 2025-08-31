@@ -1,44 +1,12 @@
-import Editor, { loader } from '@monaco-editor/react';
-import type * as monacoEditor from 'monaco-editor';
-
-import hljs from 'highlight.js/lib/core';
-import erlang from 'highlight.js/lib/languages/erlang';
-import 'highlight.js/styles/github.css';
+import Editor from '@monaco-editor/react';
 import { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
+import { highlightErlangCode, initErlangSyntax } from '../../config/erlangSyntax';
 import type { ExampleFile, PaterlResult } from '../../services/paterlService';
 import { PaterlService } from '../../services/paterlService';
 
-// Register languages
-hljs.registerLanguage('erlang', erlang);
-
-// Configure Monaco Editor with Erlang language support
-loader.init().then((monacoInstance) => {
-  const monaco = monacoInstance;
-  // Register Erlang language
-  monaco.languages.register({ id: 'erlang' });
-
-  // Define Erlang syntax highlighting rules
-  const erlangLanguage = {
-    tokenizer: {
-      root: [
-        [/\b(module|export|import|behaviour|record|macro|include|define|when|if|case|receive|after|of|end|fun|try|catch|throw|begin|let|in|spawn|self|send|apply|call|whereis|register|unregister|exit|link|unlink|monitor|demonitor|andalso|orelse)\b/, 'keyword', ''],
-        [/[A-Z][a-zA-Z0-9_]*/, 'type', ''],
-        [/[a-z][a-zA-Z0-9_]*/, 'identifier', ''],
-        [/[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?/, 'number', ''],
-        [/'[^']*'/, 'string', ''],
-        [/"[^"]*"/, 'string', ''],
-        [/%.*/, 'comment', ''],
-        [/->|=>|:=|==|=:=|=\/=|>=|=<|<|>|\+|-|\*|\/|\+\+|--|\|\|/, 'operator', ''],
-        [/[.,;]/, 'delimiter', ''],
-        [/[{}()[\]]/, 'delimiter', ''],
-        [/[ \t\r\n]+/, 'white', '']
-      ]
-    }
-  }
-
-  monaco.languages.setMonarchTokensProvider('erlang', erlangLanguage as monacoEditor.languages.IMonarchLanguage);
-});
+// Initialize Erlang syntax highlighting
+initErlangSyntax();
 
 // Interactive sandbox component for testing Mailboxer on example programs with communication errors
 function Sandbox() {
@@ -57,9 +25,7 @@ function Sandbox() {
     // Load the initial example file
     loadExampleFile('id_server_code');
     // Initialize syntax highlighting for inline code blocks
-    document.querySelectorAll('code').forEach((block) => {
-      hljs.highlightElement(block as HTMLElement);
-    });
+    highlightErlangCode();
   }, []);
 
   const loadExampleFile = async (exampleKey: string) => {
@@ -261,12 +227,135 @@ function Sandbox() {
           </Col>
         </Row>
 
-        {/* Action buttons for running analysis and resetting code */}
+        {/* Example selection buttons */}
         <Row className="mb-4">
           <Col>
-            <div className="d-flex gap-3 align-items-center flex-wrap">
+            <div className="d-flex flex-column gap-4">
+              <div>
+                <h5 className="mb-3">Working Examples</h5>
+                <div className="d-flex flex-wrap gap-2">
+                  <Button 
+                    variant="outline-secondary"
+                    onClick={() => handleExampleChange('id_server_code')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'id_server_code' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
+                  >
+                    {isLoadingExample && currentExample === 'id_server_code' ? 'Loading...' : 'ID Server'}
+                  </Button>
+
+                  <Button 
+                    variant="outline-secondary"
+                    onClick={() => handleExampleChange('fib')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'fib' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
+                  >
+                    {isLoadingExample && currentExample === 'fib' ? 'Loading...' : 'Parallel Fibonacci'}
+                  </Button>
+
+                  <Button 
+                    variant="outline-secondary"
+                    onClick={() => handleExampleChange('kfork_dir_rec')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'kfork_dir_rec' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
+                  >
+                    {isLoadingExample && currentExample === 'kfork_dir_rec' ? 'Loading...' : 'Message Broadcast'}
+                  </Button>
+
+                  <Button 
+                    variant="outline-secondary"
+                    onClick={() => handleExampleChange('master_worker_dir_rec')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'master_worker_dir_rec' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
+                  >
+                    {isLoadingExample && currentExample === 'master_worker_dir_rec' ? 'Loading...' : 'Worker Pool'}
+                  </Button>
+
+                  <Button 
+                    variant="outline-secondary"
+                    onClick={() => handleExampleChange('ping_pong_strict_dir_rec')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'ping_pong_strict_dir_rec' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
+                  >
+                    {isLoadingExample && currentExample === 'ping_pong_strict_dir_rec' ? 'Loading...' : 'Ping Pong'}
+                  </Button>
+                </div>
+              </div>
+
+              <div>
+                <h5 className="mb-3">Error Examples</h5>
+                <div className="d-flex flex-wrap gap-2">
+                  <Button 
+                    variant={currentExample === 'unexpected_request' ? 'outline-danger' : 'outline-secondary'}
+                    onClick={() => handleExampleChange('unexpected_request')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'unexpected_request' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                  >
+                    {isLoadingExample && currentExample === 'unexpected_request' ? 'Loading...' : 'Unexpected Request'}
+                  </Button>
+
+                  <Button 
+                    variant={currentExample === 'omitted_reply' ? 'outline-danger' : 'outline-secondary'}
+                    onClick={() => handleExampleChange('omitted_reply')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'omitted_reply' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                  >
+                    {isLoadingExample && currentExample === 'omitted_reply' ? 'Loading...' : 'Omitted Reply'}
+                  </Button>
+
+                  <Button 
+                    variant={currentExample === 'payload_mismatch' ? 'outline-danger' : 'outline-secondary'}
+                    onClick={() => handleExampleChange('payload_mismatch')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'payload_mismatch' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                  >
+                    {isLoadingExample && currentExample === 'payload_mismatch' ? 'Loading...' : 'Payload Mismatch'}
+                  </Button>
+
+                  <Button 
+                    variant={currentExample === 'unsupported_request' ? 'outline-danger' : 'outline-secondary'}
+                    onClick={() => handleExampleChange('unsupported_request')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'unsupported_request' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                  >
+                    {isLoadingExample && currentExample === 'unsupported_request' ? 'Loading...' : 'Unsupported Request'}
+                  </Button>
+                </div>
+              </div>
+
+              <div>
+                <h5 className="mb-3">Challenge Example</h5>
+                <div className="d-flex flex-wrap gap-2">
+                  <Button 
+                    variant={currentExample === 'combined_errors' ? 'outline-warning' : 'outline-secondary'}
+                    onClick={() => handleExampleChange('combined_errors')}
+                    disabled={isLoadingExample}
+                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'combined_errors' ? 'border-warning text-warning bg-warning bg-opacity-10' : 'text-secondary'}`}
+                  >
+                    {isLoadingExample && currentExample === 'combined_errors' ? 'Loading...' : 'Can You Fix This?'}
+                  </Button>
+                  {isEditingCombined && (
+                    <Button 
+                      variant="outline-secondary" 
+                      onClick={handleReset}
+                      disabled={isRunning}
+                      className="px-3 py-2 fw-normal border sandbox-reset-button"
+                    >
+                      Reset Code
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
+
+        <hr className="mb-4" />
+
+        <Row className="mb-4">
+          <Col md={6}>
+            <div className="d-flex align-items-center gap-3">
               <Button 
-                variant="primary" 
+                variant="primary"
                 onClick={handleRun}
                 disabled={isRunning}
                 className="px-3 py-2 fw-normal border sandbox-run-button"
@@ -280,102 +369,9 @@ function Sandbox() {
                   'Run Mailboxer'
                 )}
               </Button>
-              
-              {isEditingCombined && (
-                <Button 
-                  variant="outline-secondary" 
-                  onClick={handleReset}
-                  disabled={isRunning}
-                  className="px-3 py-2 fw-normal border sandbox-reset-button"
-                >
-                  Reset Code
-                </Button>
-              )}
-            </div>
-          </Col>
-        </Row>
-
-        {/* Example selection buttons for different error types */}
-        <Row className="mb-4">
-          <Col>
-            <div className="d-flex gap-2 flex-wrap justify-content-center">
-              <Button 
-                variant={currentExample === 'id_server_code' ? 'outline-success' : 'outline-secondary'}
-                onClick={() => handleExampleChange('id_server_code')}
-                disabled={isLoadingExample}
-                className={`px-3 py-2 fw-normal border sandbox-example-button ${currentExample === 'id_server_code' ? 'border-success text-success bg-success bg-opacity-10' : 'text-secondary'}`}
-              >
-                {isLoadingExample && currentExample === 'id_server_code' ? 'Loading...' : (
-                  <>
-                    ID Server Example <small className="text-muted ms-1 sandbox-example-button-text">(Working)</small>
-                  </>
-                )}
-              </Button>
-              
-              <Button 
-                variant={currentExample === 'unexpected_request' ? 'outline-danger' : 'outline-secondary'}
-                onClick={() => handleExampleChange('unexpected_request')}
-                disabled={isLoadingExample}
-                className={`px-3 py-2 fw-normal border sandbox-example-button ${currentExample === 'unexpected_request' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
-              >
-                {isLoadingExample && currentExample === 'unexpected_request' ? 'Loading...' : (
-                  <>
-                    Unexpected Request <small className="text-muted ms-1 sandbox-example-button-text">Example</small>
-                  </>
-                )}
-              </Button>
-              
-              <Button 
-                variant={currentExample === 'omitted_reply' ? 'outline-danger' : 'outline-secondary'}
-                onClick={() => handleExampleChange('omitted_reply')}
-                disabled={isLoadingExample}
-                className={`px-3 py-2 fw-normal border sandbox-example-button ${currentExample === 'omitted_reply' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
-              >
-                {isLoadingExample && currentExample === 'omitted_reply' ? 'Loading...' : (
-                  <>
-                    Omitted Reply <small className="text-muted ms-1 sandbox-example-button-text">Example</small>
-                  </>
-                )}
-              </Button>
-              
-              <Button 
-                variant={currentExample === 'payload_mismatch' ? 'outline-danger' : 'outline-secondary'}
-                onClick={() => handleExampleChange('payload_mismatch')}
-                disabled={isLoadingExample}
-                className={`px-3 py-2 fw-normal border sandbox-example-button ${currentExample === 'payload_mismatch' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
-              >
-                {isLoadingExample && currentExample === 'payload_mismatch' ? 'Loading...' : (
-                  <>
-                    Payload Mismatch <small className="text-muted ms-1 sandbox-example-button-text">Example</small>
-                  </>
-                )}
-              </Button>
-              
-              <Button 
-                variant={currentExample === 'unsupported_request' ? 'outline-danger' : 'outline-secondary'}
-                onClick={() => handleExampleChange('unsupported_request')}
-                disabled={isLoadingExample}
-                className={`px-3 py-2 fw-normal border sandbox-example-button ${currentExample === 'unsupported_request' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
-              >
-                {isLoadingExample && currentExample === 'unsupported_request' ? 'Loading...' : (
-                  <>
-                    Unsupported Request <small className="text-muted ms-1 sandbox-example-button-text">Example</small>
-                  </>
-                )}
-              </Button>
-              
-              <Button 
-                variant={currentExample === 'combined_errors' ? 'outline-warning' : 'outline-secondary'}
-                onClick={() => handleExampleChange('combined_errors')}
-                disabled={isLoadingExample}
-                className={`px-3 py-2 fw-normal border sandbox-example-button ${currentExample === 'combined_errors' ? 'border-warning text-warning bg-warning bg-opacity-10' : 'text-secondary'}`}
-              >
-                {isLoadingExample && currentExample === 'combined_errors' ? 'Loading...' : (
-                  <>
-                    Fix This? <small className="text-muted ms-1 sandbox-example-button-text">Challenge</small>
-                  </>
-                )}
-              </Button>
+              <span className="text-secondary">
+                Loaded file: <code>{`${currentExample}.erl`}</code>
+              </span>
             </div>
           </Col>
         </Row>
@@ -421,39 +417,55 @@ function Sandbox() {
           </Col>
         </Row>
 
-        {/* Error explanation section showing details about the current example */}
-        {currentExample !== 'id_server_code' && (
-          <Row className="mb-4">
-            <Col>
-              <div className="p-3 bg-light border rounded">
-                <h6 className="fw-bold mb-0">Error Details:</h6>
-                {currentExample === 'combined_errors' ? (
-                  <>
-                    <p className="mb-1 mt-2"><strong>Line 39:</strong> Omitted Reply - Missing response to client. <strong>Fix:</strong> Uncomment the line <code className="language-erlang">Client ! {`{id, N}`},</code></p>
-                    <p className="mb-1"><strong>Line 56:</strong> Payload Mismatch - String instead of integer. <strong>Fix:</strong> Change <code className="language-erlang">"5"</code> to <code className="language-erlang">5</code></p>
-                    <p className="mb-1"><strong>Line 57:</strong> Unexpected Request - Extra init message. <strong>Fix:</strong> Remove the line <code className="language-erlang">Server ! {`{init, 10}`},</code></p>
-                    <p className="mb-1"><strong>Line 58:</strong> Unsupported Request - Wrong message tag. <strong>Fix:</strong> Change <code className="language-erlang">gte</code> to <code className="language-erlang">get</code></p>
-                  </>
-                ) : (
-                  <>
-                    {currentExample === 'omitted_reply' && (
-                      <p className="mb-1 mt-2"><strong>Line 39:</strong> Missing reply message. The server receives a request but doesn't send a response back to the client, causing a deadlock.</p>
-                    )}
-                    {currentExample === 'payload_mismatch' && (
-                      <p className="mb-1 mt-2"><strong>Line 56:</strong> Type mismatch. The init message sends a string "5" instead of an integer 5, violating the type specification.</p>
-                    )}
-                    {currentExample === 'unexpected_request' && (
-                      <p className="mb-1 mt-2"><strong>Line 57:</strong> Protocol violation. The client sends an extra init message that violates the expected communication pattern.</p>
-                    )}
-                    {currentExample === 'unsupported_request' && (
-                      <p className="mb-1 mt-2"><strong>Line 46:</strong> Unknown message tag. The client sends "gte" instead of "get", using an unsupported message type.</p>
-                    )}
-                  </>
-                )}
-              </div>
-            </Col>
-          </Row>
-        )}
+        {/* Example/Error details section */}
+        <Row className="mb-4">
+          <Col>
+            <div className="p-3 bg-light border rounded">
+              <h6 className="fw-bold mb-0">Example Details:</h6>
+              {/* Working Examples */}
+              {['id_server_code', 'fib', 'kfork_dir_rec', 'master_worker_dir_rec', 'ping_pong_strict_dir_rec'].includes(currentExample) && (
+                <p className="mb-0 mt-2">
+                  {currentExample === 'id_server_code' && (
+                    "A simple ID server that demonstrates client-server communication with request-reply pattern."
+                  )}
+                  {currentExample === 'fib' && (
+                    "A recursive fibonacci calculator using parallel processes to compute sub-problems."
+                  )}
+                  {currentExample === 'kfork_dir_rec' && (
+                    "Spawns multiple actors and demonstrates one-way message broadcasting."
+                  )}
+                  {currentExample === 'master_worker_dir_rec' && (
+                    "Task distribution system with a master delegating work to a pool of worker processes."
+                  )}
+                  {currentExample === 'ping_pong_strict_dir_rec' && (
+                    "Two processes exchanging ping/pong messages with a configurable number of rounds."
+                  )}
+                </p>
+              )}
+              {/* Error Examples */}
+              {currentExample === 'combined_errors' && (
+                <>
+                  <p className="mb-1 mt-2"><strong>Line 39:</strong> Omitted Reply - Missing response to client. <strong>Fix:</strong> Uncomment the line <code className="language-erlang">Client ! {`{id, N}`},</code></p>
+                  <p className="mb-1"><strong>Line 56:</strong> Payload Mismatch - String instead of integer. <strong>Fix:</strong> Change <code className="language-erlang">"5"</code> to <code className="language-erlang">5</code></p>
+                  <p className="mb-1"><strong>Line 57:</strong> Unexpected Request - Extra init message. <strong>Fix:</strong> Remove the line <code className="language-erlang">Server ! {`{init, 10}`},</code></p>
+                  <p className="mb-1"><strong>Line 58:</strong> Unsupported Request - Wrong message tag. <strong>Fix:</strong> Change <code className="language-erlang">gte</code> to <code className="language-erlang">get</code></p>
+                </>
+              )}
+              {currentExample === 'omitted_reply' && (
+                <p className="mb-0 mt-2"><strong>Line 39:</strong> Missing reply message. The server receives a request but doesn't send a response back to the client, causing a deadlock.</p>
+              )}
+              {currentExample === 'payload_mismatch' && (
+                <p className="mb-0 mt-2"><strong>Line 56:</strong> Type mismatch. The <code className="language-erlang">init</code> message sends a string <code className="language-erlang">"5"</code> instead of an integer <code className="language-erlang">5</code>, violating the type specification.</p>
+              )}
+              {currentExample === 'unexpected_request' && (
+                <p className="mb-0 mt-2"><strong>Line 57:</strong> Protocol violation. The client sends an extra <code className="language-erlang">init</code> message that violates the expected communication pattern.</p>
+              )}
+              {currentExample === 'unsupported_request' && (
+                <p className="mb-0 mt-2"><strong>Line 46:</strong> Unknown message tag. The client sends <code className="language-erlang">gte</code> instead of <code className="language-erlang">get</code>, using an unsupported message type.</p>
+              )}
+            </div>
+          </Col>
+        </Row>
       </Container>
     </>
   );
