@@ -13,7 +13,6 @@ function Navbar() {
             alt="Mailboxer Logo"
             className="navbar-logo me-2"
           />
-          <span className="navbar-brand-text d-none d-sm-inline">Mailboxer</span>
         </BootstrapNavbar.Brand>
 
         {/* Mobile toggle button */}
