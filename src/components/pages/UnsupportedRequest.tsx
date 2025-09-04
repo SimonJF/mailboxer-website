@@ -112,7 +112,7 @@ id_server_loop(N) ->
       </Row>
 
       {/* Navigation links to previous and next pages */}
-      <Row>
+      <Row className="navigation-row">
         <Col md={6}>
           <Link
             to="/actor-communication-errors/message-type-error/payload-mismatch"

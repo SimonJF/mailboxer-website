@@ -57,7 +57,7 @@ function MailboxerExamples() {
               <div className="code-pane position-relative examples-code-pane-small">
                 <pre className="code-block examples-code-block language-erlang">
                   {`Server ! {init, 5},
-Server ! {init, 5},  % ← Extra initialization`}
+Server ! {init, 5},  % <- Extra initialization`}
                 </pre>
               </div>
             </Col>
@@ -91,8 +91,8 @@ Server ! {init, 5},  % ← Extra initialization`}
               <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-small">
                 <pre className="code-block examples-code-block language-erlang">
-                  {`{get, Client} →
-  % Client ! {id, N}, ← Missing reply
+                  {`{get, Client} ->
+  % Client ! {id, N}, <- Missing reply
   id_server_loop(N + 1);`}
                 </pre>
               </div>
@@ -127,7 +127,7 @@ Server ! {init, 5},  % ← Extra initialization`}
               <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-medium">
                 <pre className="code-block examples-code-block language-erlang">
-                  {`Server ! {init, "5"},  % ← String "5" instead of integer 5`}
+                  {`Server ! {init, "5"},  % <- String "5" instead of integer 5`}
                 </pre>
               </div>
             </Col>
@@ -158,7 +158,7 @@ Server ! {init, 5},  % ← Extra initialization`}
               <h3 className="h5 fw-semibold mb-4">Code</h3>
               <div className="code-pane position-relative examples-code-pane-large">
                 <pre className="code-block examples-code-block-large language-erlang">
-                  {`Server ! {gte, self},  % ← "gte" instead of "get"`}
+                  {`Server ! {gte, self},  % <- "gte" instead of "get"`}
                 </pre>
               </div>
             </Col>

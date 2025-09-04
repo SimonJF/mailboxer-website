@@ -111,7 +111,7 @@ id_server_loop(N) ->
             {/* Navigation to specific error type examples */}
       <Row className="mb-5">
         <Col md={6}>
-          <div className="pe-3">
+          <div className="pe-md-3">
             <h3 className="text-center mb-3">Message Type Errors</h3>
             <p className="text-center mb-4 error-type-description">
               Errors that occur when message structure or payload types don't match the declared type
@@ -135,7 +135,7 @@ id_server_loop(N) ->
         </Col>
 
         <Col md={6}>
-          <div className="ps-3 border-start">
+          <div className="behavioural-type-section">
             <h3 className="text-center mb-3">Behavioural Type Errors</h3>
             <p className="text-center mb-4 error-type-description">
               Errors that occur when a sequence of messages don't conform to the protocol

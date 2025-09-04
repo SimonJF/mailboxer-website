@@ -36,7 +36,7 @@ function Sandbox() {
       }
     } catch (error) {
       console.error('Failed to load example file:', error);
-      setCode('// Mailboxer is currently unavailable.');
+      setCode('% Mailboxer is currently unavailable. \n% Please contact STARDUST team for support.');
     } finally {
       setIsLoadingExample(false);
     }

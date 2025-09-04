@@ -6,21 +6,22 @@ function Navbar() {
   return (
     <BootstrapNavbar expand="lg" className="navbar">
       <Container>
-        <div className="w-100 d-flex justify-content-center align-items-center">
-          {/* Mailbox emoji linking to home page */}
-          <Link
-            to="/"
-            className="me-4 text-decoration-none d-flex align-items-center"
-          >
-            <img
-              src="/mailboxer_logo.svg"
-              alt="Mailboxer Logo"
-              className="navbar-logo"
-            />
-          </Link>
+        {/* Logo and brand */}
+        <BootstrapNavbar.Brand as={Link} to="/" className="d-flex align-items-center">
+          <img
+            src="/mailboxer_logo.svg"
+            alt="Mailboxer Logo"
+            className="navbar-logo me-2"
+          />
+          <span className="navbar-brand-text d-none d-sm-inline">Mailboxer</span>
+        </BootstrapNavbar.Brand>
 
-          {/* Main navigation menu with all page links */}
-          <Nav className="d-flex align-items-center">
+        {/* Mobile toggle button */}
+        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" className="border-0" />
+
+        {/* Collapsible navigation menu */}
+        <BootstrapNavbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
             <Nav.Link
               as={Link}
               to="/"
@@ -33,7 +34,8 @@ function Navbar() {
               to="/actor-communication-errors"
               className="px-3 fw-medium text-uppercase"
             >
-              ACTOR COMMUNICATION ERRORS
+              <span className="d-none d-lg-inline">Actor Communication Errors</span>
+              <span className="d-lg-none">Actor Communication Errors</span>
             </Nav.Link>
             <Nav.Link
               as={Link}
@@ -47,24 +49,27 @@ function Navbar() {
               to="/mailboxer"
               className="px-3 fw-medium text-uppercase"
             >
-              What is Mailboxer?
+              <span className="d-none d-lg-inline">What is Mailboxer?</span>
+              <span className="d-lg-none">What is Mailboxer?</span>
             </Nav.Link>
             <Nav.Link
               as={Link}
               to="/mailboxer-examples"
               className="px-3 fw-medium text-uppercase"
             >
-              Mailboxer Examples
+              <span className="d-none d-lg-inline">Mailboxer Examples</span>
+              <span className="d-lg-none">Mailboxer Examples</span>
             </Nav.Link>
             <Nav.Link
               as={Link}
               to="/sandbox"
               className="px-3 fw-medium text-uppercase"
             >
-              Mailboxer Sandbox
+              <span className="d-none d-lg-inline">Mailboxer Sandbox</span>
+              <span className="d-lg-none">Mailboxer Sandbox</span>
             </Nav.Link>
           </Nav>
-        </div>
+        </BootstrapNavbar.Collapse>
       </Container>
     </BootstrapNavbar>
   );

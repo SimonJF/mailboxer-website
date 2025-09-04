@@ -28,11 +28,18 @@ a:hover {
 /* Navigation */
 .navbar {
   border-bottom: 1px solid #ddd;
+  padding: 0.75rem 0;
 }
 
 .navbar-logo {
   width: 32px;
   height: 32px;
+}
+
+.navbar-brand-text {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
 }
 
 /* Simple dropdown */
@@ -301,4 +308,160 @@ a:hover {
 .error-decoration {
   background-color: rgba(220, 53, 69, 0.3) !important;
   width: 5px !important;
+}
+
+/* Mobile specific styling */
+@media (max-width: 768px) {
+  /* Navbar mobile improvements */
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-nav {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .navbar-nav .nav-link:hover {
+    background-color: #f8f9fa;
+  }
+
+  .navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  /* Error type sections - horizontal border on mobile */
+  .behavioural-type-section {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #dee2e6;
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Mailboxer examples spacing */
+  .examples-container .row .col-md-6:last-child {
+    margin-top: 1.5rem;
+  }
+
+  /* Navigation improvements */
+  .navigation-row .col-md-6 {
+    margin-bottom: 1rem;
+  }
+
+  .navigation-row .col-md-6:first-child {
+    text-align: center;
+  }
+
+  .navigation-row .col-md-6:last-child .text-end {
+    text-align: center !important;
+  }
+
+  .navigation-row .col-md-6 a {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .navbar-nav .nav-link {
+    transition: color 0.2s ease-in-out;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #007bff !important;
+  }
+
+  /* Error label positioning for mobile */
+  .omitted-reply-error-label {
+    position: absolute;
+    top: 150px;
+    left: 160px;
+    z-index: 10;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .payload-mismatch-error-label {
+    position: absolute;
+    top: 120px;
+    left: 180px;
+    z-index: 10;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .unexpected-request-error-label {
+    position: absolute;
+    top: 140px;
+    left: 160px;
+    z-index: 10;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .unsupported-request-server-error-label {
+    position: absolute;
+    top: 105px;
+    left: 160px;
+    z-index: 10;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .unsupported-request-client-error-label {
+    position: absolute;
+    top: 155px;
+    left: 180px;
+    z-index: 10;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .unsupported-request-server-error-label {
+    position: absolute;
+    top: 105px;
+    right: 370px;
+  }
+
+  .unsupported-request-client-error-label {
+    position: absolute;
+    top: 155px;
+    right: 360px;
+  }
+
+  .unexpected-request-error-label {
+    position: absolute;
+    top: 140px;
+    right: 390px;
+  }
+
+  .payload-mismatch-error-label {
+    position: absolute;
+    top: 120px;
+    right: 360px;
+  }
+
+  .omitted-reply-error-label {
+    position: absolute;
+    top: 150px;
+    right: 370px;
+  }
 }
