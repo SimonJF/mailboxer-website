@@ -43,7 +43,7 @@ function Sandbox() {
       }
     } catch (error) {
       console.error('Failed to load example file:', error);
-      setCode('// Failed to load example file');
+      setCode('// Mailboxer is currently unavailable.');
     } finally {
       setIsLoadingExample(false);
     }
@@ -229,10 +229,11 @@ function Sandbox() {
 
         {/* Example selection buttons */}
         <Row className="mb-4">
-          <Col>
+          <Col md={6} className="border-end">
             <div className="d-flex flex-column gap-4">
+              {/* Working Example Section */}
               <div>
-                <h5 className="mb-3">Working Examples</h5>
+                <h5 className="mb-3">Working Example</h5>
                 <div className="d-flex flex-wrap gap-2">
                   <Button 
                     variant="outline-secondary"
@@ -240,111 +241,132 @@ function Sandbox() {
                     disabled={isLoadingExample}
                     className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'id_server_code' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
                   >
-                    {isLoadingExample && currentExample === 'id_server_code' ? 'Loading...' : 'ID Server'}
-                  </Button>
-
-                  <Button 
-                    variant="outline-secondary"
-                    onClick={() => handleExampleChange('fib')}
-                    disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'fib' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
-                  >
-                    {isLoadingExample && currentExample === 'fib' ? 'Loading...' : 'Parallel Fibonacci'}
-                  </Button>
-
-                  <Button 
-                    variant="outline-secondary"
-                    onClick={() => handleExampleChange('kfork_dir_rec')}
-                    disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'kfork_dir_rec' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
-                  >
-                    {isLoadingExample && currentExample === 'kfork_dir_rec' ? 'Loading...' : 'Message Broadcast'}
-                  </Button>
-
-                  <Button 
-                    variant="outline-secondary"
-                    onClick={() => handleExampleChange('master_worker_dir_rec')}
-                    disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'master_worker_dir_rec' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
-                  >
-                    {isLoadingExample && currentExample === 'master_worker_dir_rec' ? 'Loading...' : 'Worker Pool'}
-                  </Button>
-
-                  <Button 
-                    variant="outline-secondary"
-                    onClick={() => handleExampleChange('ping_pong_strict_dir_rec')}
-                    disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'ping_pong_strict_dir_rec' ? 'border-success text-success bg-success bg-opacity-10' : ''}`}
-                  >
-                    {isLoadingExample && currentExample === 'ping_pong_strict_dir_rec' ? 'Loading...' : 'Ping Pong'}
+                    ID Server
                   </Button>
                 </div>
+                <p className="mt-3 text-muted">
+                  This ID Server is a non-editable example of a mailbox-annotated ID server, with no errors.
+                </p>
               </div>
 
+              {/* ID Server with Errors Section */}
               <div>
-                <h5 className="mb-3">Error Examples</h5>
+                <h5 className="mb-3">ID Server with Errors</h5>
                 <div className="d-flex flex-wrap gap-2">
                   <Button 
                     variant={currentExample === 'unexpected_request' ? 'outline-danger' : 'outline-secondary'}
                     onClick={() => handleExampleChange('unexpected_request')}
                     disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'unexpected_request' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                    className="px-3 py-2 fw-normal border sandbox-example-button text-center"
                   >
-                    {isLoadingExample && currentExample === 'unexpected_request' ? 'Loading...' : 'Unexpected Request'}
+                    Unexpected Request
                   </Button>
 
                   <Button 
                     variant={currentExample === 'omitted_reply' ? 'outline-danger' : 'outline-secondary'}
                     onClick={() => handleExampleChange('omitted_reply')}
                     disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'omitted_reply' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                    className="px-3 py-2 fw-normal border sandbox-example-button text-center"
                   >
-                    {isLoadingExample && currentExample === 'omitted_reply' ? 'Loading...' : 'Omitted Reply'}
+                    Omitted Reply
                   </Button>
 
                   <Button 
                     variant={currentExample === 'payload_mismatch' ? 'outline-danger' : 'outline-secondary'}
                     onClick={() => handleExampleChange('payload_mismatch')}
                     disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'payload_mismatch' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                    className="px-3 py-2 fw-normal border sandbox-example-button text-center"
                   >
-                    {isLoadingExample && currentExample === 'payload_mismatch' ? 'Loading...' : 'Payload Mismatch'}
+                    Payload Mismatch
                   </Button>
 
                   <Button 
                     variant={currentExample === 'unsupported_request' ? 'outline-danger' : 'outline-secondary'}
                     onClick={() => handleExampleChange('unsupported_request')}
                     disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'unsupported_request' ? 'border-danger text-danger bg-danger bg-opacity-10' : 'text-secondary'}`}
+                    className="px-3 py-2 fw-normal border sandbox-example-button text-center"
                   >
-                    {isLoadingExample && currentExample === 'unsupported_request' ? 'Loading...' : 'Unsupported Request'}
+                    Unsupported Request
                   </Button>
                 </div>
+                <p className="mt-3 text-muted">
+                  These examples are of the ID server, with specific errors. Try solve them if you can by editing them.
+                </p>
               </div>
+            </div>
+          </Col>
 
-              <div>
-                <h5 className="mb-3">Challenge Example</h5>
-                <div className="d-flex flex-wrap gap-2">
-                  <Button 
-                    variant={currentExample === 'combined_errors' ? 'outline-warning' : 'outline-secondary'}
-                    onClick={() => handleExampleChange('combined_errors')}
-                    disabled={isLoadingExample}
-                    className={`px-3 py-2 fw-normal border sandbox-example-button text-center ${currentExample === 'combined_errors' ? 'border-warning text-warning bg-warning bg-opacity-10' : 'text-secondary'}`}
-                  >
-                    {isLoadingExample && currentExample === 'combined_errors' ? 'Loading...' : 'Can You Fix This?'}
-                  </Button>
-                  {isEditingCombined && (
-                    <Button 
-                      variant="outline-secondary" 
-                      onClick={handleReset}
-                      disabled={isRunning}
-                      className="px-3 py-2 fw-normal border sandbox-reset-button"
-                    >
-                      Reset Code
-                    </Button>
-                  )}
-                </div>
+          <Col md={6}>
+            {/* More Examples Section */}
+            <div>
+              <h5 className="mb-3">More Working Examples</h5>
+              <div className="d-flex flex-wrap gap-2">
+                <Button 
+                  variant="outline-secondary"
+                  onClick={() => handleExampleChange('fib')}
+                  disabled={isLoadingExample}
+                  className="px-3 py-2 fw-normal border sandbox-example-button text-center"
+                >
+                  Parallel Fibonacci
+                </Button>
+
+                <Button 
+                  variant="outline-secondary"
+                  onClick={() => handleExampleChange('kfork_dir_rec')}
+                  disabled={isLoadingExample}
+                  className="px-3 py-2 fw-normal border sandbox-example-button text-center"
+                >
+                  Message Broadcast
+                </Button>
+
+                <Button 
+                  variant="outline-secondary"
+                  onClick={() => handleExampleChange('master_worker_dir_rec')}
+                  disabled={isLoadingExample}
+                  className="px-3 py-2 fw-normal border sandbox-example-button text-center"
+                >
+                  Worker Pool
+                </Button>
+
+                <Button 
+                  variant="outline-secondary"
+                  onClick={() => handleExampleChange('ping_pong_strict_dir_rec')}
+                  disabled={isLoadingExample}
+                  className="px-3 py-2 fw-normal border sandbox-example-button text-center"
+                >
+                  Ping Pong
+                </Button>
               </div>
+                <p className="mt-3 text-muted">
+                  The above editable examples are all annotated with mailbox types, experiment with them to add errors, and then fix those errors.
+                </p>
+
+                <div className="mt-4-5">
+                   <h5 className="sandbox-section-header">Challenge Example</h5>
+                  <div className="d-flex flex-wrap gap-2">
+                    <Button 
+                      variant={currentExample === 'combined_errors' ? 'outline-warning' : 'outline-secondary'}
+                      onClick={() => handleExampleChange('combined_errors')}
+                      disabled={isLoadingExample}
+                      className="px-3 py-2 fw-normal border sandbox-example-button text-center"
+                    >
+                      Can You Fix This?
+                    </Button>
+                    {isEditingCombined && (
+                      <Button 
+                        variant="outline-secondary" 
+                        onClick={handleReset}
+                        disabled={isRunning}
+                        className="px-3 py-2 fw-normal border sandbox-reset-button"
+                      >
+                        Reset Code
+                      </Button>
+                    )}
+                  </div>
+                  <p className="mt-3 text-muted">
+                    This example is the ID Server with the following errors: Omitted Reply, Unsupported Request, Payload Mismatch, and Unexpected Request. Try solve it if you can by editing it.
+                  </p>
+                </div>
             </div>
           </Col>
         </Row>
