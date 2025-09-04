@@ -10,10 +10,13 @@ function Navbar() {
           {/* Mailbox emoji linking to home page */}
           <Link
             to="/"
-            className="me-4 text-decoration-none"
-            style={{ fontSize: "2rem" }}
+            className="me-4 text-decoration-none d-flex align-items-center"
           >
-            📬
+            <img
+              src="/mailboxer_logo.svg"
+              alt="Mailboxer Logo"
+              className="navbar-logo"
+            />
           </Link>
 
           {/* Main navigation menu with all page links */}

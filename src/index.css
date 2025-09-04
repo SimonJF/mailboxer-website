@@ -30,6 +30,11 @@ a:hover {
   border-bottom: 1px solid #ddd;
 }
 
+.navbar-logo {
+  width: 32px;
+  height: 32px;
+}
+
 /* Simple dropdown */
 .dropdown:hover .dropdown-menu {
   display: block;
