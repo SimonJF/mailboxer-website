@@ -55,7 +55,11 @@ function Sandbox() {
            exampleKey === 'fib' || 
            exampleKey === 'kfork_dir_rec' || 
            exampleKey === 'master_worker_dir_rec' || 
-           exampleKey === 'ping_pong_strict_dir_rec';
+           exampleKey === 'ping_pong_strict_dir_rec' ||
+           exampleKey === 'unexpected_request' ||
+           exampleKey === 'omitted_reply' ||
+           exampleKey === 'payload_mismatch' ||
+           exampleKey === 'unsupported_request';
   };
 
   const handleExampleChange = (exampleKey: string) => {

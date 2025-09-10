@@ -36,7 +36,7 @@ id_server_loop(N) ->
   ?expects("*Get"),
   receive
     {get, Client} ->
-      % Client ! {id, N}, <-- Omitted Reply
+      % Client ! {id, N}, % <-- Omitted Reply
       id_server_loop(N + 1)
   end.
 
