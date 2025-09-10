@@ -55,12 +55,17 @@ docker-compose up -d
 ## Project Structure
 
 ```
+examples/
+server/
+└── server.js           # Express.js back-end server  
 src/
-├── components/          # React components
+├── components/         # React components
 │   ├── layout/         # Navigation and layout
 │   └── pages/          # Application pages
+├── config/             # Helper files
 ├── services/           # Business logic
-└── App.tsx            # Main application
+└── App.tsx             # Main application
+docker-compose.yml      # Docker Compose file to run container stack
 ```
 
 ## Research Context
@@ -109,7 +114,6 @@ Developed as part of MSc research in Computer Science, focusing on static analys
 **Source Code:**
 - [Original Mailboxer Implementation](https://github.com/duncanatt/paterl)
 - [Dockerized Mailboxer Fork](https://github.com/ZubyWasTaken/paterl)
-- [Website Source Code](https://github.com/ZubyWasTaken/mailboxer-website)
 
 **Docker Images:**
 - [Mailboxer Docker Image](https://hub.docker.com/repository/docker/zubywastaken/paterl/general)
