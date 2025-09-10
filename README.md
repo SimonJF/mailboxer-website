@@ -1,4 +1,4 @@
-# Mailboxer Website
+# MF: A Web Front-end for Mailboxer
 
 Interactive web interface for exploring actor communication patterns and behavioral types in Erlang. This project serves as a visualization tool for MSc research on Mailboxer - a static analysis tool that transpiles Erlang code to Pat and performs type checking to detect communication errors in actor-based systems.
 
