@@ -1,6 +1,6 @@
 services:
   mailboxer-website:
-    image: zubywastaken/mailboxer-website:latest
+    image: zubywastaken/mailboxer-website:uofg
     container_name: mailboxer-website
     ports:
       - "3000:3001"
