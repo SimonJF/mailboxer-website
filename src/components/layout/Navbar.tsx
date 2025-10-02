@@ -1,51 +1,56 @@
 import { Navbar as BootstrapNavbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-// Main navigation bar with logo and menu links
 function Navbar() {
   return (
     <BootstrapNavbar expand="lg" className="navbar">
       <Container>
-        {/* Logo and brand */}
-        <BootstrapNavbar.Brand as={Link} to="/" className="d-flex align-items-center">
+        <BootstrapNavbar.Brand
+          as={Link}
+          to="."
+          className="d-flex align-items-center"
+        >
           <img
-            src="/mailboxer_logo.svg"
+            src={`${import.meta.env.BASE_URL}mailboxer_logo.svg`}
             alt="Mailboxer Logo"
             className="navbar-logo me-2"
           />
         </BootstrapNavbar.Brand>
 
-        {/* Mobile toggle button */}
-        <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" className="border-0" />
+        <BootstrapNavbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="border-0"
+        />
 
-        {/* Collapsible navigation menu */}
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link
               as={Link}
-              to="/"
+              to="."
               className="px-3 fw-medium text-uppercase"
             >
               Home
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/actor-communication-errors"
+              to="actor-communication-errors"
               className="px-3 fw-medium text-uppercase"
             >
-              <span className="d-none d-lg-inline">Actor Communication Errors</span>
+              <span className="d-none d-lg-inline">
+                Actor Communication Errors
+              </span>
               <span className="d-lg-none">Actor Communication Errors</span>
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/behavioural-types"
+              to="behavioural-types"
               className="px-3 fw-medium text-uppercase"
             >
               Behavioural Types
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/mailboxer"
+              to="mailboxer"
               className="px-3 fw-medium text-uppercase"
             >
               <span className="d-none d-lg-inline">What is Mailboxer?</span>
@@ -53,7 +58,7 @@ function Navbar() {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/mailboxer-examples"
+              to="mailboxer-examples"
               className="px-3 fw-medium text-uppercase"
             >
               <span className="d-none d-lg-inline">Mailboxer Examples</span>
@@ -61,7 +66,7 @@ function Navbar() {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/sandbox"
+              to="sandbox"
               className="px-3 fw-medium text-uppercase"
             >
               <span className="d-none d-lg-inline">Mailboxer Sandbox</span>
@@ -73,5 +78,4 @@ function Navbar() {
     </BootstrapNavbar>
   );
 }
-
 export default Navbar;

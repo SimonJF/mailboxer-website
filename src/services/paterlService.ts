@@ -13,10 +13,12 @@ export interface ExampleFile {
 
 // Service for interacting with Paterl static analysis tool via Docker
 export class PaterlService {
+  private static readonly BASE_PATH = '/stardust/MailboxerDemo';
+
   // Executes Paterl commands inside Docker container via backend API
   private static async executeDockerCommand(command: string): Promise<string> {
     try {
-      const response = await fetch('/api/execute-paterl', {
+      const response = await fetch(`${this.BASE_PATH}/api/execute-paterl`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +41,7 @@ export class PaterlService {
   static async readExampleFile(exampleName: string): Promise<ExampleFile> {
     try {
       console.log('Service: Reading example file:', exampleName);
-      const response = await fetch(`/api/read-example?file=${exampleName}.erl`);
+      const response = await fetch(`${this.BASE_PATH}/api/read-example?file=${exampleName}.erl`);
       
       if (!response.ok) {
         throw new Error(`Failed to read example file: ${response.status}`);
@@ -103,7 +105,7 @@ export class PaterlService {
   // Runs user-provided Erlang code through Paterl analysis
   static async runCodeContent(code: string, exampleName: string): Promise<PaterlResult> {
     try {
-      const response = await fetch('/api/run-code', {
+      const response = await fetch(`${this.BASE_PATH}/api/run-code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

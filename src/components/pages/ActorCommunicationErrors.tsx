@@ -79,7 +79,7 @@ id_server_loop(N) ->
       <Row className="mb-4">
         <Col className="text-center">
           <img
-            src="/id_server.webp"
+            src={`${import.meta.env.BASE_URL}id_server.webp`}
             alt="ID Server Visual Representation"
             className="img-fluid"
             style={{ maxHeight: "400px" }}
