@@ -32,7 +32,7 @@ function MailboxerExamples() {
               View the complete mailbox-annotated ID server code
             </strong>{" "}
             on the{" "}
-            <a href="/mailboxer" className="text-decoration-none fw-bold">
+            <a href="/stardust/MailboxerDemo/mailboxer" className="text-decoration-none fw-bold">
               What is Mailboxer?
             </a>{" "}
             page.
